@@ -66,6 +66,7 @@ public class Vehiculo {
                 + ", Estado=" + Estado + "]";
     }
 
-    
-    
+    public String tipo() {
+        return "Vehiculo";
+    }
 }
