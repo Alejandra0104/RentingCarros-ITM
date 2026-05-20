@@ -29,9 +29,4 @@ public class CarroSedan extends Vehiculo {
     public void setTransmision(String transmision) {
         Transmision = transmision;
     }
-
-    @Override
-    public string tipo() {
-        return "CarroSedan";
-    }
 }

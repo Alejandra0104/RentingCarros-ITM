@@ -1,8 +1,8 @@
 package Modelos;
 
 public class CamionetaSUV {
-    public String Traccion;
-    public float CapacidadMaletero;
+    private String Traccion;
+    private float CapacidadMaletero;
 
     public CamionetaSUV() {
 
@@ -28,10 +28,5 @@ public class CamionetaSUV {
 
     public void setCapacidadMaletero(float capacidadMaletero) {
         CapacidadMaletero = capacidadMaletero;
-    }
-
-    @Override
-    public String tipo() {
-        return "CamionetaSUV";
     }
 }
