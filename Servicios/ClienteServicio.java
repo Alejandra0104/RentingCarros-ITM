@@ -1,26 +1,30 @@
 package Servicios;
 
+import Modelos.Cliente;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ClienteServicio {
     
     Scanner sc =  new Scanner(System.in);
-    public ArrayList<Cliente>RegistrarCliente(ArrayList<Cliente> l){
+    public ArrayList<Cliente>RegistrarCliente(ArrayList<Cliente> listaCliente){
 
         boolean pedir = true;
+//Registrar Cliente        
         while (pedir) { 
-            Cliente c = new Cliente();
-
+//Se crea un nuevo objeto Cliente     
+            Cliente nuevoCliente = new Cliente();
+// Se piden los Datos que se necesitan 
             System.out.println("Ingrese el Nombre del Cliente ");
-            c.setNombre(sc.next());
+            nuevoCliente.setNombre(sc.next());
             System.out.println("Ingrese la Cedula del Cliente ");
-            c.setCedula(sc.nextInt());
+            nuevoCliente.setCedula(sc.next());
             System.out.println("Ingrese el Telefono del Cliente ");
-            c.setTelefono(sc.nextInt());
+            nuevoCliente.setTelefono(sc.next());
+// Guardar ese cliente dentro de la ArrayList 
+            listaCliente.add(nuevoCliente);
 
-            l.add(c);
-
+// Preguntar si desea continuar 
             System.out.println("Desea seguir Ingresando 1) Si , 2) No ");
             System.out.println("*************************************************");
             
@@ -32,32 +36,44 @@ public class ClienteServicio {
             }
             
         }
-        return  l;
+        return  listaCliente;
 
     }
-    public ArrayList<Cliente> Modificar (ArrayList<Cliente> l){
+    //Modificar
+    public ArrayList<Cliente> Modificar (ArrayList<Cliente> listaCliente){
 
-        for (Cliente c : l) {
+        System.out.println("************ ACTUALIZAR CLIENTE ****************");
+
+//Recorrer la listaClientes 
+        for (Cliente c : listaCliente) {
+//Validar si la cedula ya existe             
             if (c.getCedula() == Cedula ) {
-
+// Solicitar nuevos datos
                 System.out.println("Por favor ingrese Ingrese el nombre a a Modificar ");
                 c.setNombre(sc.next());
                 System.out.println("Por favor Ingrese el Telefono a Modificar ");
                 c.setTelefono(sc.next());
+                System.out.println("Cliente Actualizado con exito ");
             }
             
         }
-        return l;
+        return listaCliente;
     }
-    public ArrayList<Cliente> Eliminar (ArrayList<Cliente> l){
+    //Eliminar
+    public ArrayList<Cliente> Eliminar (ArrayList<Cliente> listaCliente){
 
-        for (int i = 0; i < l.size(); i++) {
-            if (l.get(i).getCedula() == cedula) {
+        System.out.println("********** ELIMINAR CLIENTE ***********");
 
-            l.remove(i);
+// Se recorre la listas 
+        for (int i = 0; i < listaCliente.size(); i++) {
+            //Valida si la cedula ya existe 
+            if (listaCliente.get(i).getCedula() == Cedula) {
+
+// Elimina el cliente
+            listaCliente.remove(i);
             }
             
         }
-        return l;
+        return listaCliente;
     }
 }
