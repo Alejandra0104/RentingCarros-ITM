@@ -2,6 +2,7 @@ package Servicios;
 
 import Modelos.Cliente;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class ClienteServicio {
@@ -43,11 +44,11 @@ public class ClienteServicio {
     public ArrayList<Cliente> Modificar (ArrayList<Cliente> listaCliente){
 
         System.out.println("************ ACTUALIZAR CLIENTE ****************");
-
+        String cedula = sc.nextLine();
 //Recorrer la listaClientes 
         for (Cliente c : listaCliente) {
 //Validar si la cedula ya existe             
-            if (c.getCedula() == Cedula ) {
+            if (c.getCedula().equalsIgnoreCase(Cedula) ) {
 // Solicitar nuevos datos
                 System.out.println("Por favor ingrese Ingrese el nombre a a Modificar ");
                 c.setNombre(sc.next());
@@ -63,11 +64,11 @@ public class ClienteServicio {
     public ArrayList<Cliente> Eliminar (ArrayList<Cliente> listaCliente){
 
         System.out.println("********** ELIMINAR CLIENTE ***********");
-
+        String cedula = sc.nextLine();
 // Se recorre la listas 
         for (int i = 0; i < listaCliente.size(); i++) {
             //Valida si la cedula ya existe 
-            if (listaCliente.get(i).getCedula() == Cedula) {
+            if (listaCliente.get(i).getCedula().equalsIgnoreCase(cedula)) {
 
 // Elimina el cliente
             listaCliente.remove(i);
@@ -75,5 +76,17 @@ public class ClienteServicio {
             
         }
         return listaCliente;
+    }
+     public void Consultar(LinkedList<Cliente> listaCliente) {
+        System.out.println("Por favor Ingrese la cedula a buscar");
+        String cedula = sc.nextLine();
+        for (Cliente o : listaCliente) {
+            if (o.getCedula().equals(cedula)) {
+                System.out.println("Nombre: " + o.getNombre());
+                System.out.println("Telefono: " + o.getTelefono());
+                System.out.println("Cedula: " + o.getCedula());
+                System.out.println("------------------------------");
+            }
+        }
     }
 }
