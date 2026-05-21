@@ -6,7 +6,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class Contrato 
+public class ContratoServicio
 { 
     Scanner sc = new Scanner(System.in);
         public LinkedList<ContratoRenting> RegistrarContrato(LinkedList<ContratoRenting> contratos) 
