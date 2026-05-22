@@ -1,6 +1,6 @@
 package Modelos;
 
-public class CamionetaSUV {
+public class CamionetaSUV extends Vehiculo {
     private String Traccion;
     private float CapacidadMaletero;
 

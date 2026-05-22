@@ -1,10 +1,13 @@
 import java.util.List;
 import java.util.ArrayList;
+
+import Modelos.CamionetaSUV;
+import Modelos.CarroSedan;
 import Modelos.Vehiculo;
 
 public class VehiculoServicio {
     // Lista puede ir aquí
-    private List<Vehiculo> listaVehiculos = new ArrayList<>;
+    private List<Vehiculo> listaVehiculos = new ArrayList<>();
 
     public VehiculoServicio() { }
 
@@ -138,9 +141,9 @@ public class VehiculoServicio {
     }
     public boolean actualizarEstado(String placa, String estado) {
         // Buscar vehiculo
-        for(vehiculo : listaVehiculos) {
+        for(Vehiculo vehiculo : listaVehiculos) {
             if(vehiculo.getPlaca().equalsIgnoreCase(placa)) {
-                vehiculo.setEstado = estado;
+                vehiculo.setEstado(estado);
 
                 return true;
             }

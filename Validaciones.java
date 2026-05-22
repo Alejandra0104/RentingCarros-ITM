@@ -19,7 +19,7 @@ public class Validaciones {
         return false;
     }
 
-    public boolean validarTexto(String texto) {
+    /*public boolean validarTexto(String texto) {
         // Se valida que: no contenga numeros, simbolos y que su longitud sea coherente
     }
 
@@ -29,5 +29,5 @@ public class Validaciones {
 
     public boolean validarDecimal(float numero) {
 
-    }
+    }*/
 }
