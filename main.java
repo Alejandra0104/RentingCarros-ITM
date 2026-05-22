@@ -46,6 +46,7 @@ public class main {
 
                                 break;
                             default:
+                                System.out.println("Por favor elige una opcion correcta.");
                                 break;
                         }
                     }
@@ -59,6 +60,8 @@ public class main {
                     System.out.println("Saliendo...");
                     
                     System.exit(0);
+                default:
+                    System.out.println("Por favor elige una opcion correcta.");
             }
         }
     }
