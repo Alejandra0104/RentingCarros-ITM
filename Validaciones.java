@@ -15,7 +15,7 @@ public class Validaciones {
             return true;
         }
 
-        System.out.println("La placa es inválida. Debe seguir el formato AAA-000")
+        System.out.println("La placa es inválida. Debe seguir el formato AAA-000");
         return false;
     }
 

@@ -1,3 +1,5 @@
+package Servicios;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -78,7 +80,7 @@ public class VehiculoServicio {
         Vehiculo vehiculoEncontrado = vehiculoExiste(nuevoVehiculo.getPlaca());
 
         if(vehiculoEncontrado != null) {
-            System.out.println("ERROR: Ya se encuentra un vehículo registrado con esa placa.")
+            System.out.println("ERROR: Ya se encuentra un vehículo registrado con esa placa.");
 
             return false;
         }
@@ -156,7 +158,7 @@ public class VehiculoServicio {
         Vehiculo vehiculoEncontrado = vehiculoExiste(placa);
 
         if(vehiculoEncontrado == null) {
-            System.out.println("ERROR: Vehiculo no encontrado.")
+            System.out.println("ERROR: Vehiculo no encontrado.");
 
             return false;
         }
