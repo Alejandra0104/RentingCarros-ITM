@@ -57,6 +57,8 @@ public class VehiculoServicio {
             // Casteo e impresión de datos según tipo de vehiculo
             mostrarInfoAdicional(vehiculo);
         }
+
+        return true;
     }
     public boolean consultar(String placa) {
         // Verificar que existe
@@ -86,7 +88,7 @@ public class VehiculoServicio {
         }
 
         // Casteando segun tipo de vehiculo
-        if(tipoVehiculo == "CamionetaSuv") {
+        if(tipoVehiculo == "CamionetaSUV") {
             CamionetaSUV nuevaCamioneta = (CamionetaSUV) nuevoVehiculo;
 
             // Añadiendo a lista

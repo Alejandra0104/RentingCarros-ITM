@@ -1,5 +1,10 @@
 import java.util.Scanner;
 
+import Modelos.CamionetaSUV;
+import Modelos.CarroSedan;
+import Modelos.Vehiculo;
+import Servicios.VehiculoServicio;
+
 public class VehiculoControlador {
     private VehiculoServicio servicioVehiculo = new VehiculoServicio();
     private Validaciones validaciones = new Validaciones();
@@ -84,7 +89,7 @@ public class VehiculoControlador {
     }
 
     public boolean consultar() {
-        System.out.println("------CONSULTANDO VEHICULO------"):
+        System.out.println("------CONSULTANDO VEHICULO------");
 
         // Solicitando placa
         System.out.print("Ingresa la placa que deseas buscar: ");
@@ -96,7 +101,7 @@ public class VehiculoControlador {
         if(!placaValida) { return false; }
 
         // Llamando servicio
-        boolean respuesta = servicioVehiculo.consultar();
+        boolean respuesta = servicioVehiculo.consultar(placa);
 
         // Imprimiendo resultado
         return respuesta;
@@ -104,7 +109,7 @@ public class VehiculoControlador {
 
     public boolean agregar() {
         try {
-            System.out.println("------AGREGANDO VEHICULO------"):
+            System.out.println("------AGREGANDO VEHICULO------");
 
             Vehiculo nuevoVehiculo;
 
@@ -118,37 +123,45 @@ public class VehiculoControlador {
             // VALIDACION FALTANTE DE TEXTO
 
             System.out.print("Ingrese el modelo: ");
-            int modelo = Integer.parseInt(scanner.nextLine());
+            int modelo = Integer.parseInt(teclado.nextLine());
             // VALIDACION FALTANTE DE NUMERO
 
             System.out.print("Ingrese el precio diario: ");
-            float precioDiario = Float.parseFloat(scanner.nextLine());
+            float precioDiario = Float.parseFloat(teclado.nextLine());
             // VALIDACION FALTANTE DE NUMERO
 
             System.out.println("¿Qué tipo de vehiculo es?");
             System.out.println("1. Camioneta SUV");
             System.out.println("2. Carro Sedan");
             System.out.println("3. Tradicional");
+
             int tipoVehiculo = Integer.parseInt(teclado.nextLine());
+            String tipo;
 
             switch(tipoVehiculo) {
                 case 1: // Camioneta SUV
                     String traccion = preguntarTraccion();
 
                     System.out.print("Ingrese la capacidad del maletero en litros: ");
-                    float capacidadMaletero = Float.parseFloat(scanner.nextLine());
+                    float capacidadMaletero = Float.parseFloat(teclado.nextLine());
                     // VALIDACION FALTANTE DE NUMERO
 
                     nuevoVehiculo = new CamionetaSUV(placa, marca, modelo, precioDiario, "Disponible", traccion, capacidadMaletero);
+                    tipo = "CamionetaSUV";
+
                     break;
                 case 2: // Carro Sedan
                     String tipoCombustible = preguntarTipoCombustible();
                     String transmision = preguntarTransmision();
 
                     nuevoVehiculo = new CarroSedan(placa, marca, modelo, precioDiario, "Disponible", tipoCombustible, transmision);
+                    tipo = "CarroSedan";
+
                     break;
                 case 3: // Tradicional
-                    nuevoVehiculo = new Vehiculo(placa, marca, modelo, precioDiario, "Disponible" // Valor 'disponible' quemado);
+                    nuevoVehiculo = new Vehiculo(placa, marca, modelo, precioDiario, "Disponible"); // Valor 'disponible' quemado
+                    tipo = "Tradicional";
+
                     break;
                 default:
                     System.out.println("Debes ingresar una opción valida.");
@@ -157,31 +170,33 @@ public class VehiculoControlador {
             }
 
             // Llamando servicio
-            boolean respuesta = servicioVehiculo.agregar(nuevoVehiculo);
+            boolean respuesta = servicioVehiculo.agregar(nuevoVehiculo, tipo);
 
             // Imprimiendo resultado
             if(respuesta) {
-                System.out.println("---VEHICULO AGREGADO CON EXITO---")
+                System.out.println("---VEHICULO AGREGADO CON EXITO---");
 
                 return true;
             }
 
             return false;
         } catch (NumberFormatException error) {
-            System.out.println("ERROR: Debes ingresar un numero valido.")
+            System.out.println("ERROR: Debes ingresar un numero valido.");
+
+            return false;
         }
     }
     public boolean actualizar() {
-        System.out.println("------ACTUALIZANDO VEHICULO------"):
+        System.out.println("------ACTUALIZANDO VEHICULO------");
 
         // Solicitando y validando datos
 
         // Llamando servicio
-        boolean respuesta = servicioVehiculo.actualizar();
+        boolean respuesta = servicioVehiculo.actualizar(null);
 
         // Imprimiendo resultado
         if(respuesta) {
-            System.out.println("---VEHICULO ACTUALIZADO CON EXITO---")
+            System.out.println("---VEHICULO ACTUALIZADO CON EXITO---");
 
             return true;
         }
@@ -189,7 +204,7 @@ public class VehiculoControlador {
         return false;
     }
     public boolean eliminar() {
-        System.out.println("------ELIMINANDO VEHICULO------"):
+        System.out.println("------ELIMINANDO VEHICULO------");
 
         // Solicitando y validando datos
         System.out.print("Ingrese la placa: ");
@@ -201,7 +216,7 @@ public class VehiculoControlador {
 
         // Imprimiendo resultado
         if(respuesta) {
-            System.out.println("---VEHICULO ELIMINADO CON EXITO---")
+            System.out.println("---VEHICULO ELIMINADO CON EXITO---");
 
             return true;
         }
