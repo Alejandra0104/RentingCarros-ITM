@@ -156,6 +156,14 @@ public class ContratoServicio
         contratos.removeIf(x -> x.getIdContrato().equals(idContrato));
         System.out.println("El contrato se eliminó correctamente...");
         return contratos;
+    } 
+
+    public void mostrar(LinkedList<ContratoRenting> contratos) {
+        // Imprimiendo contrato por contrato
+        for(ContratoRenting contrato : contratos) {
+            System.out.println("---CONTRATO " + contrato.getIdContrato() + "---");
+            System.out.println(contrato.toString());
+        }
     }
     
     public void Consultar(LinkedList<ContratoRenting> contratos) {
@@ -173,4 +181,30 @@ public class ContratoServicio
             }
         }
     }
+
+    /*  Metodo para mostrar el historial con una lista auxiliar
+    public static ContratoRenting retroceder(LinkedList<ContratoRenting> contratos) {
+
+            LinkedList<ContratoRenting> ContratosFinalizados = new LinkedList<>; 
+            
+            
+            if(!historial.isEmpty() && historial.size() > 1) {
+                
+                aux.push( historial.pop());
+
+                PaginaWeb paginaActual = historial.peek();
+
+                historial.push(aux.pop());
+
+                System.out.println("Ahora estás en la página " + paginaActual.getNombre());
+                System.out.println(paginaActual.toString());
+                return paginaActual;
+
+            } else {
+            
+                System.out.println("No existe pagina anterior");
+                return historial.peek();
+            }
+        }
+    */
 }

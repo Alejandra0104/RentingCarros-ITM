@@ -24,10 +24,6 @@ public class Vehiculo {
         return Placa;
     }
 
-    public void setPlaca(String placa) {
-        Placa = placa;
-    }
-
     public String getMarca() {
         return Marca;
     }
@@ -62,10 +58,9 @@ public class Vehiculo {
 
     @Override
     public String toString() {
-        return "Vehiculo [Placa=" + Placa + ", Marca=" + Marca + ", Modelo=" + Modelo + ", PrecioDiario=" + PrecioDiario
-                + ", Estado=" + Estado + "]";
+        return "Marca: " + Marca +
+                "Modelo: " + Modelo +
+                "Precio Diario: " + PrecioDiario +
+                "Estado: " + Estado;
     }
-
-    
-    
 }
