@@ -2,26 +2,29 @@ package Servicios;
 
 import Modelos.Cliente;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ClienteServicio {
+    private static List<Cliente> listaCliente = new ArrayList<>();
     
     Scanner sc =  new Scanner(System.in);
-    public ArrayList<Cliente>RegistrarCliente(ArrayList<Cliente> listaCliente){
 
-        boolean pedir = true, valido = true ;
+    public List<Cliente>RegistrarCliente(){
+        boolean pedir = true;
+        boolean valido = true;
+
        //Registrar Cliente        
         while (pedir) { 
             //Se crea un nuevo objeto Cliente     
             Cliente nuevoCliente = new Cliente();
+
             // Se piden los Datos que se necesitan 
-
-            //valido cédula
             while (valido) {
-
+                //valido cédula
                 valido = false;
 
-                System.out.print("Ingrese la cedula del cliente: ");
+                System.out.println("Ingrese la cedula del cliente: ");
                 nuevoCliente.setCedula(sc.nextLine());
 
                 for (Cliente c : listaCliente) {
@@ -34,8 +37,10 @@ public class ClienteServicio {
                     }
                 }
             }
+
             System.out.println("Ingrese el Nombre del Cliente ");
             nuevoCliente.setNombre(sc.nextLine());
+
             System.out.println("Ingrese el Apellido del Cliente ");
             nuevoCliente.setApellido(sc.nextLine());
 
@@ -57,17 +62,18 @@ public class ClienteServicio {
                         valido = true;
                     }
                 }
+            
             }
+
             System.out.println("Ingrese la direccion de Cliente ");
             nuevoCliente.setDireccion(sc.nextLine());
 
-           //valido la licencia de conduccion 
+            //valido la licencia de conduccion 
             valido = true ;
             while (valido) {
-
                 valido = false;
 
-                System.out.print("Ingrese la licencia de conduccion del cliente: ");
+                System.out.println("Ingrese la licencia de conduccion del cliente: ");
                 nuevoCliente.setLicenciaConduccion(sc.nextLine());
 
                 for (Cliente c : listaCliente) {
@@ -84,7 +90,7 @@ public class ClienteServicio {
            
             // Guardar ese cliente dentro de la ArrayList 
             listaCliente.add(nuevoCliente);
-             System.out.println("Cliente registrado ");
+            System.out.println("Cliente registrado ");
 
             // Preguntar si desea continuar 
             System.out.println("Desea seguir Registrando Cliente: 1) Si , 2) No ");
@@ -93,18 +99,16 @@ public class ClienteServicio {
             int opt = sc.nextInt();
             sc.nextLine();
             if (opt == 2) {
-
-            pedir = false;    
-                
+                   
+                pedir = false;     
             }
-            
         }
 
         return  listaCliente;
 
     }
     //Modificar
-    public ArrayList<Cliente> Modificar (ArrayList<Cliente> listaCliente){
+    public List<Cliente> Modificar (){
 
         System.out.println("************ ACTUALIZAR CLIENTE ****************");
 
@@ -133,11 +137,9 @@ public class ClienteServicio {
                 System.out.println("Licencia de conduccion del cliente: " + c.getLicenciaConduccion());
                 System.out.println("******************************");
 
-
                 System.out.println("A continuacion se debe ingresar la nueva informacion... ");
 
                 //Se deben ingresear los nuevos datos del cliente 
-
 
                 System.out.println("Ingrese la Cedula del cliente ");
                 c.setCedula(sc.nextLine());
@@ -166,7 +168,7 @@ public class ClienteServicio {
     }
 
     //Eliminar
-    public ArrayList<Cliente> Eliminar (ArrayList<Cliente> listaCliente){
+    public List<Cliente> Eliminar (){
 
         System.out.println("********** ELIMINAR CLIENTE ***********");
         System.out.println("Cual cliente desea Eliminar");
@@ -176,7 +178,7 @@ public class ClienteServicio {
         System.out.println("La Cedula se eliminó correctamente...");
         return listaCliente;
     }
-    public void Consultar(ArrayList<Cliente> listaCliente) {
+    public void Consultar() {
         System.out.println("Por favor Ingrese la cedula a buscar");
         String cedula = sc.nextLine();
         for (Cliente c : listaCliente) {
@@ -192,4 +194,24 @@ public class ClienteServicio {
                 System.out.println("'\nEl cliente no se encontro");
         }
     }
+   public List<Cliente> VerClientes (){
+
+        System.out.println("Ver todos los Clientes que estan Registrados ");
+        // Estoy llenando la listaClientes para Ver que todos los clientes si esten registrados 
+     for (Cliente c : listaCliente) {
+        System.out.println("Cedula: " + c.getCedula());
+        System.out.println("Nombre: " + c.getNombre());
+        System.out.println("Apellido: " + c.getApellido());
+        System.out.println("Telefono: " + c.getTelefono());
+        System.out.println("Direccion: " + c.getDireccion());
+        System.out.println("Licencia de conduccion" + c.getLicenciaConduccion());
+        System.out.println("------------------------------");  
+        
+        
+    } 
+    return listaCliente;
+
+    }
+
+    
 }
