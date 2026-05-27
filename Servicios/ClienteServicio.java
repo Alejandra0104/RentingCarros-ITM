@@ -171,7 +171,7 @@ public class ClienteServicio {
     public List<Cliente> Eliminar (){
 
         System.out.println("********** ELIMINAR CLIENTE ***********");
-        System.out.println("Cual cliente desea Eliminar");
+        System.out.println("Ingresa la cedula del cliente que desea Eliminar");
         String cedula = sc.nextLine();
         // Se recorre la listas 
         listaCliente.removeIf(x -> x.getCedula().equals(cedula));
@@ -179,20 +179,31 @@ public class ClienteServicio {
         return listaCliente;
     }
     public void Consultar() {
-        System.out.println("Por favor Ingrese la cedula a buscar");
+        System.out.println("Por favor Ingrese la cedula para buscar el cliente ");
         String cedula = sc.nextLine();
+
+        boolean encontrado = false;
+
         for (Cliente c : listaCliente) {
-            if (c.getCedula().equals(cedula)) {
+            if (c.getCedula().equalsIgnoreCase(cedula)) {
                 System.out.println("Cedula: " + c.getCedula());
                 System.out.println("Nombre: " + c.getNombre());
                 System.out.println("Apellido: " + c.getApellido());
                 System.out.println("Telefono: " + c.getTelefono());
                 System.out.println("Direccion: " + c.getDireccion());
-                System.out.println("Licencia de conduccion" + c.getLicenciaConduccion());
+                System.out.println("Licencia de conduccion: " + c.getLicenciaConduccion());
                 System.out.println("------------------------------");
-            }else
-                System.out.println("'\nEl cliente no se encontro");
+
+                encontrado = true;
+
+            }
+            
+            }
+            if (!encontrado) {
+                System.out.println("'\nEl cliente no se encontro.");
+                System.out.println("");    
         }
+        
     }
    public List<Cliente> VerClientes (){
 
@@ -204,7 +215,7 @@ public class ClienteServicio {
         System.out.println("Apellido: " + c.getApellido());
         System.out.println("Telefono: " + c.getTelefono());
         System.out.println("Direccion: " + c.getDireccion());
-        System.out.println("Licencia de conduccion" + c.getLicenciaConduccion());
+        System.out.println("Licencia de conduccion: " + c.getLicenciaConduccion());
         System.out.println("------------------------------");  
         
         
