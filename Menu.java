@@ -14,7 +14,7 @@ public class Menu {
             System.out.println("4. Exportar informacion");
             System.out.println("5. Salir");
                 
-            System.out.println("Ingrese la opcion que desea realizar: ");
+            System.out.print("Ingrese la opcion que desea realizar: ");
             int opcion = Integer.parseInt(teclado.nextLine());
 
             return opcion;
@@ -35,12 +35,12 @@ public class Menu {
             System.out.println("5. Ver todos los clientes");
             System.out.println("6. Regresar al menu principal");
                 
-            System.out.println("Ingrese la opcion que desea realizar: ");
+            System.out.print("Ingrese la opcion que desea realizar: ");
             int opcion = Integer.parseInt(teclado.nextLine());
 
             return opcion;
         } catch(NumberFormatException error) {
-            System.out.println("Escriba por favor un numero.");
+            System.out.print("Escriba por favor un numero.");
 
             return 0;
         }
@@ -56,12 +56,12 @@ public class Menu {
             System.out.println("5. Ver todos los Vehiculos");
             System.out.println("6. Regresar al menu principal");
                 
-            System.out.println("Ingrese la opcion que desea realizar: ");
+            System.out.print("Ingrese la opcion que desea realizar: ");
             int opcion = Integer.parseInt(teclado.nextLine());
 
             return opcion;
         } catch(NumberFormatException error) {
-            System.out.println("Escriba por favor un numero.");
+            System.out.print("Escriba por favor un numero.");
 
             return 0;
         }
@@ -77,12 +77,12 @@ public class Menu {
             System.out.println("5. Ver todos los contratos");
             System.out.println("6. Regresar al menu principal");
                 
-            System.out.println("Ingrese la opcion que desea realizar: ");
+            System.out.print("Ingrese la opcion que desea realizar: ");
             int opcion = Integer.parseInt(teclado.nextLine());
 
             return opcion;
         } catch(NumberFormatException error) {
-            System.out.println("Escriba por favor un numero.");
+            System.out.print("Escriba por favor un numero.");
 
             return 0;
         }

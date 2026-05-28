@@ -4,11 +4,8 @@ public class main {
     public static void main(String[] args) {
         Menu servicioMenu = new Menu();
 
-        // Inicializacion de Controladores
-        VehiculoControlador controladorVehiculo = new VehiculoControlador();
-
-        /*// Inicializacion de Servicios
-        VehiculoServicio servicioVehiculo = new VehiculoServicio();*/
+        // Inicializacion de Servicios
+        VehiculoServicio servicioVehiculo = new VehiculoServicio();
 
         // Mostrar menú general de forma infinita hasta que el usuario desee salir
         while(true) {
@@ -22,23 +19,23 @@ public class main {
                 case 2: // Seccion Vehiculos
                     while(continuar) {
                         // Mostrar menu de clientes de forma infinita hasta que el usuario desee retroceder
-                        int opcionCliente = servicioMenu.clientes();
+                        int opcionVehiculo = servicioMenu.vehiculos();
 
-                        switch (opcionCliente) {
+                        switch (opcionVehiculo) {
                             case 1: // Agregar
-                                controladorVehiculo.agregar();
+                                servicioVehiculo.agregar();
                                 break;
                             case 2: // Actualizar
                                 // falta terminar.
                                 break;
                             case 3: // Consultar
-                                controladorVehiculo.consultar();
+                                //servicioVehiculo.consultar();
                                 break;
                             case 4: // Eliminar
-                                controladorVehiculo.eliminar();
+                                //servicioVehiculo.eliminar();
                                 break;
                             case 5: // Obtener todos
-                                controladorVehiculo.mostrar();
+                                //servicioVehiculo.mostrar();
                                 break;
                             case 6: // Devolverme al menu principal
                                 System.out.println("Devolviendo...");

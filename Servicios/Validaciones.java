@@ -1,3 +1,5 @@
+package Servicios;
+
 public class Validaciones {
     public Validaciones() {}
 
@@ -16,6 +18,16 @@ public class Validaciones {
         }
 
         System.out.println("La placa es inválida. Debe seguir el formato AAA-000");
+        return false;
+    }
+    public boolean validarTexto(String texto) {
+        String textoRegex = "^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{3,30}$";
+
+        if(texto.matches(textoRegex)) {
+            return true;
+        }
+
+        System.err.println("Debe ser mayor a 3 caracteres y menor a 30 carácteres. No puede contener numeros ni simbolos especiales");
         return false;
     }
 
