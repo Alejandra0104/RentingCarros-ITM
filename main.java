@@ -1,6 +1,8 @@
 
+
 import Modelos.Cliente;
 import Servicios.ClienteServicio;
+import Servicios.Menu;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,17 +10,18 @@ import java.util.Scanner;
 
 public class main {
     public static void main(String[] args) {
+        
         Menu servicioMenu = new Menu();
         Scanner sc = new Scanner(System.in);
-        ArrayList<Cliente> listaCliente = new ArrayList<>();
-        ClienteServicio servicios = new ClienteServicio();
-        
 
         // Inicializacion de Controladores
         VehiculoControlador controladorVehiculo = new VehiculoControlador();
 
         /*// Inicializacion de Servicios
         VehiculoServicio servicioVehiculo = new VehiculoServicio();*/
+        ArrayList<Cliente> listaCliente = new ArrayList<>();
+        ClienteServicio servicios = new ClienteServicio();
+        
 
         // Mostrar menú general de forma infinita hasta que el usuario desee salir
         while(true) {

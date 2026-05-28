@@ -7,14 +7,16 @@ import java.util.Scanner;
 
 public class ClienteServicio {
     private static List<Cliente> listaCliente = new ArrayList<>();
-    
+    private Menu servicioMenu = new Menu();
+
     Scanner sc =  new Scanner(System.in);
+    Validaciones v = new Validaciones();
 
     public List<Cliente>RegistrarCliente(){
         boolean pedir = true;
         boolean valido = true;
 
-       //Registrar Cliente        
+        //Registrar Cliente        
         while (pedir) { 
             //Se crea un nuevo objeto Cliente     
             Cliente nuevoCliente = new Cliente();
@@ -33,8 +35,26 @@ public class ClienteServicio {
 
                         System.out.println("El cliente ya existe ");
 
+                        System.out.println("Y. Desea Regiastrar otro cliente?");
+                        System.out.println("N. Volver al menú principal");
+                        String opcion = sc.nextLine();
+
+                        while (!v.ValidarDimension(opcion)) 
+                        {
+                            opcion = sc.nextLine();
+                        }
+                        if (opcion.equalsIgnoreCase("N")) {
+                                    
+                            return listaCliente;
+                        }
+                        if (opcion.equalsIgnoreCase("Y")) {
+                            
+                        }
+
                         valido = true;
+
                     }
+                    
                 }
             }
 
