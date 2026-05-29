@@ -64,28 +64,53 @@ public class Validaciones
     
     public String validarFechaFin(String fechaInicio) {
 
-    try {
+        try {
 
-        System.out.print("Ingrese la fecha de fin (AAAA-MM-DD): ");
-        String fechaFin = sc.nextLine();
+            System.out.print("Ingrese la fecha de fin (AAAA-MM-DD): ");
+            String fechaFin = sc.nextLine();
 
-        LocalDate inicio = LocalDate.parse(fechaInicio);
-        LocalDate fin = LocalDate.parse(fechaFin);
+            LocalDate inicio = LocalDate.parse(fechaInicio);
+            LocalDate fin = LocalDate.parse(fechaFin);
 
-        if (fin.isBefore(inicio)) {
+            if (fin.isBefore(inicio)) {
 
-            System.out.println("La fecha fin no puede ser menor que la fecha inicio");
+                System.out.println("La fecha fin no puede ser menor que la fecha inicio");
+
+                return validarFechaFin(fechaInicio);
+            }
+
+            return fechaFin;
+
+        } catch (Exception e) {
+
+            System.out.println("Fecha inválida. Use formato AAAA-MM-DD");
 
             return validarFechaFin(fechaInicio);
         }
-
-        return fechaFin;
-
-    } catch (Exception e) {
-
-        System.out.println("Fecha inválida. Use formato AAAA-MM-DD");
-
-        return validarFechaFin(fechaInicio);
     }
-}
+
+    public float validarValorTotal() {
+
+        try {
+
+            System.out.print("Ingrese el valor total: ");
+
+            float valor = Float.parseFloat(sc.nextLine());
+
+            if (valor <= 0) {
+
+                System.out.println("El valor debe ser mayor a 0");
+
+                return validarValorTotal();
+            }
+
+            return valor;
+
+        } catch (Exception e) {
+
+            System.out.println("Debe ingresar un número válido");
+
+            return validarValorTotal();
+        }
+    }
 }

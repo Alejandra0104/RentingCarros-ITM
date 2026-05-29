@@ -8,13 +8,14 @@ import java.util.Scanner;
 
 public class ContratoServicio
 {
+    LinkedList<ContratoRenting> contratos = new LinkedList<>();
     Scanner sc = new Scanner(System.in);
     Validaciones validacion = new Validaciones();
 
     //si esta vble cambia, es porque encontro el nuevoContrato en modificar, consultar y eliminar
     boolean contratoEncontrado = false;
 
-    public LinkedList<ContratoRenting> RegistrarContrato(LinkedList<ContratoRenting> contratos) 
+    public LinkedList<ContratoRenting> RegistrarContrato() 
     {
         boolean pedir = true, valido = true;
         String opcion = "";    
@@ -152,7 +153,7 @@ public class ContratoServicio
         return contratos;
     }
     
-    public LinkedList<ContratoRenting> modificarContrato(LinkedList<ContratoRenting> contratos) {
+    public LinkedList<ContratoRenting> modificarContrato() {
 
         contratoEncontrado = false;
 
@@ -168,7 +169,7 @@ public class ContratoServicio
 
         System.out.println("");
 
-        for (ContratoRenting nuevoContrato : contratos) 
+        for (ContratoRenting nuevoContrato : contratos) {
             if (nuevoContrato.getIdContrato().equals(idContrato)) {
                 contratoEncontrado = true;
 
@@ -214,7 +215,7 @@ public class ContratoServicio
         return contratos;
     }
 
-    public void Consultar(LinkedList<ContratoRenting> contratos) {
+    public void Consultar() {
 
         contratoEncontrado = false;
         String idContrato;
@@ -250,9 +251,10 @@ public class ContratoServicio
     
     public LinkedList<ContratoRenting> finalizarContrato(LinkedList<ContratoRenting> contratos) {
 
+        String idContrato;
         do{
             System.out.print("Por favor Ingrese el id del Contrato a finalizar: ");
-            String idContrato = sc.nextLine();
+            idContrato = sc.nextLine();
         }while (!validacion.validarIdcontrato(idContrato));
         
         contratoEncontrado = false;
@@ -278,7 +280,7 @@ public class ContratoServicio
         return contratos;
     }
     
-    public void imprimirInforme(LinkedList<ContratoRenting> contratos) {
+    public void imprimirInforme() {
 
         float totalIngresos = 0;
 
