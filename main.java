@@ -78,7 +78,7 @@ public class main {
                                 break;
                             case 5:
                                 //Mostrar todos los contratos  
-                                servicioContrato.mostrar(contratos);
+                                servicioContrato.imprimirInforme(contratos);
                                 break;
                             case 6:// Devolverme al menu principal
                                 System.out.println("Devolviendo...");

@@ -3,6 +3,7 @@ import java.util.Scanner;
 import Modelos.CamionetaSUV;
 import Modelos.CarroSedan;
 import Modelos.Vehiculo;
+import Servicios.Validaciones;
 import Servicios.VehiculoServicio;
 
 public class VehiculoControlador {
