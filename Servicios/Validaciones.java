@@ -40,7 +40,7 @@ public class Validaciones {
 
         return true;
     }
-}
+
     /*public boolean validarTexto(String texto) {
         // Se valida que: no contenga numeros, simbolos y que su longitud sea coherente
     }
@@ -52,3 +52,46 @@ public class Validaciones {
     public boolean validarDecimal(float numero) {
 
     }*/
+    public boolean ValidarNumeros(String Numeros){
+
+        String numerosRegex = "^[0-9]{6,10}$";
+
+        if (Numeros.matches(numerosRegex)) {
+            
+            return true;
+            
+        }
+        System.out.println("Debe ingresar de 6 a 10 numeros, reintente...");
+        return false;
+        
+        
+    }
+      
+
+    public boolean ValidarTexto(String Texto){
+
+        String textoRegex = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{2,50}$";
+
+        if (Texto.matches(textoRegex)) {
+
+             return true;
+
+
+        }
+        System.out.println("Debe ingresar 2 a 50 caracteres de texto, reintente...");
+        return false;
+    }
+    public boolean ValidarDireccion(String direccion){
+
+        String direccionRegex = "^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ#\\-., ]{10,100}$";
+
+        if (direccion.matches(direccionRegex)) {
+
+            return true;
+
+        } 
+        System.out.println("Direccion invalida");
+        return false;
+    }
+    
+}
