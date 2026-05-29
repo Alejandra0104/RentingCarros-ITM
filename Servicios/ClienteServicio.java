@@ -193,6 +193,7 @@ public class ClienteServicio {
         String cedula = sc.nextLine();
 
         System.out.println("");
+        
 
         /*Se crea la bandera para que al momento de ingresar la cedula, si no lo encuentra dentro de la lista, el nunca entra al IF del for */
         boolean ClienteEncontrado = false;
@@ -230,6 +231,13 @@ public class ClienteServicio {
 
                 System.out.println("Ingrese la cedula del cliente ");
                 String nuevaCedula = sc.nextLine();
+                // Validar la cedula 
+                while (!validacion.ValidarNumeros(nuevaCedula)) { 
+
+                    System.out.println("Ingrese nuevamente la cedula: ");
+                    nuevaCedula = sc.nextLine();
+                    
+                }
 
                 
                 for (Cliente cli : listaCliente) {
