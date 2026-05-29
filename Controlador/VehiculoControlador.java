@@ -3,12 +3,12 @@ import java.util.Scanner;
 import Modelos.CamionetaSUV;
 import Modelos.CarroSedan;
 import Modelos.Vehiculo;
-import Servicios.Validaciones;
+import Servicios.ValidacionServicio;
 import Servicios.VehiculoServicio;
 
 public class VehiculoControlador {
     private VehiculoServicio servicioVehiculo = new VehiculoServicio();
-    private Validaciones validaciones = new Validaciones();
+    private ValidacionServicio validaciones = new ValidacionServicio();
 
     
 

@@ -12,12 +12,12 @@ public class Vehiculo {
 
     }
 
-    public Vehiculo(String placa, String marca, int modelo, float precioDiario, String estado) {
+    public Vehiculo(String placa, String marca, int modelo, float precioDiario) {
         Placa = placa;
         Marca = marca;
         Modelo = modelo;
         PrecioDiario = precioDiario;
-        Estado = estado;
+        Estado = "Disponible";
     }
 
     public String getPlaca() {

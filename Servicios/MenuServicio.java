@@ -2,10 +2,10 @@ package Servicios;
 
 import java.util.Scanner;
 
-public class Menu {
+public class MenuServicio {
     private Scanner teclado = new Scanner(System.in);
 
-    public Menu() {
+    public MenuServicio() {
     }
 
     public int general() {
