@@ -7,7 +7,7 @@ public class Vehiculo {
     private int Modelo;
     private float PrecioDiario;
     private String Estado;
-    
+
     public Vehiculo() {
 
     }
@@ -58,9 +58,9 @@ public class Vehiculo {
 
     @Override
     public String toString() {
-        return "Marca: " + Marca +
-                "Modelo: " + Modelo +
-                "Precio Diario: " + PrecioDiario +
+        return "Marca: " + Marca + "\n" +
+                "Modelo: " + Modelo + "\n" +
+                "Precio Diario: " + PrecioDiario + "\n" +
                 "Estado: " + Estado;
     }
 }

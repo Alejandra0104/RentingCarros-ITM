@@ -65,6 +65,7 @@ public class VehiculoServicio {
 
         return tipoCombustible;
     }
+
     public String preguntarTraccion() {
         System.out.println("Ingrese la traccion del vehiculo");
         System.out.println("1. 4x2");
@@ -101,6 +102,7 @@ public class VehiculoServicio {
 
         return traccion;
     }
+
     public String preguntarTransmision() {
         System.out.println("Ingrese la transmision del vehiculo");
         System.out.println("1. Automatica");
@@ -137,6 +139,7 @@ public class VehiculoServicio {
 
         return transmision;
     }
+
     public int preguntarTipo() {
         System.out.println("¿Qué tipo de vehiculo es?");
         System.out.println("1. Camioneta SUV");
@@ -166,6 +169,25 @@ public class VehiculoServicio {
         return tipoVehiculo;
     }
 
+    // Solicitadores
+    public String solicitarPlaca() {
+        // Placa
+        String placa = "";
+
+        while (!valido) {
+            System.out.print("Ingrese la placa: ");
+            placa = (teclado.nextLine()).toUpperCase();
+
+            if (validaciones.validarPlaca(placa)) {
+                valido = true;
+            }
+        }
+
+        resetVariables();
+
+        return placa;
+    }
+
     // Utiles
     public void mostrarInfoAdicional(Vehiculo vehiculo) {
         // Verificando qué vehiculo es para realizar casting y obtener datos adicionales
@@ -187,6 +209,7 @@ public class VehiculoServicio {
             System.out.println("Tipo: Vehiculo Tradicional");
         }
     }
+
     public void resetVariables() {
         continuar = true;
         valido = false;
@@ -206,6 +229,13 @@ public class VehiculoServicio {
 
     // Funciones CRUD
     public boolean mostrar() {
+        // Validando que hayan registros
+        if (listaVehiculos.isEmpty()) {
+            System.out.println("No hay ningun registro aún");
+
+            return false;
+        }
+
         // Imprimiendo vehiculo por vehiculo
         for (Vehiculo vehiculo : listaVehiculos) {
             System.out.println("---VEHICULO " + vehiculo.getPlaca() + "---");
@@ -218,20 +248,37 @@ public class VehiculoServicio {
         return true;
     }
 
-    public boolean consultar(String placa) {
-        // Verificar que existe
-        Vehiculo vehiculoEncontrado = vehiculoExiste(placa);
-
-        if (vehiculoEncontrado == null) {
-            System.out.println("ERROR: Vehiculo no encontrado");
+    public boolean consultar() {
+        // Validando que hayan registros
+        if (listaVehiculos.isEmpty()) {
+            System.out.println("No hay ningun registro aún");
 
             return false;
         }
 
-        // Imprimiendo resultado
-        System.out.println("---VEHICULO " + vehiculoEncontrado.getPlaca() + "---");
-        System.out.println(vehiculoEncontrado.toString());
-        mostrarInfoAdicional(vehiculoEncontrado);
+        do {
+            resetVariables();
+
+            // Solicitar placa
+            String placa = solicitarPlaca();
+
+            // Verificar que existe
+            Vehiculo vehiculoEncontrado = vehiculoExiste(placa);
+
+            if (vehiculoEncontrado == null) {
+                System.out.println("ERROR: Vehiculo no encontrado");
+
+                return false;
+            }
+
+            // Imprimiendo resultado
+            System.out.println("---VEHICULO " + vehiculoEncontrado.getPlaca() + "---");
+            System.out.println(vehiculoEncontrado.toString());
+            mostrarInfoAdicional(vehiculoEncontrado);
+
+            // Preguntar si desea seguir buscando
+            continuar = menu.preguntarContinuar() == 1;
+        } while (continuar);
 
         return true;
     }
@@ -248,16 +295,7 @@ public class VehiculoServicio {
             // Solicitando datos
 
             // Placa
-            String placa = "";
-
-            while (!valido) {
-                System.out.print("Ingrese la placa: ");
-                placa = (teclado.nextLine()).toUpperCase();
-
-                if (validaciones.validarPlaca(placa)) {
-                    valido = true;
-                }
-            }
+            String placa = solicitarPlaca();
 
             resetVariables();
 
@@ -416,40 +454,103 @@ public class VehiculoServicio {
         return true;
     }
 
-    public boolean actualizar(Vehiculo vehiculoActualizado) {
-        // Verificar que existe
-        Vehiculo vehiculoEncontrado = vehiculoExiste(vehiculoActualizado.getPlaca());
+    public boolean actualizar() {
+        // Recibir opción de menú
+        int opcion = menu.actualizarVehiculo();
 
-        if (vehiculoEncontrado == null) {
-            System.out.println("ERROR: Vehiculo no encontrado.");
+        // Verificar si el usuario desea salir
+        if (opcion == 8) {
+            System.out.println("Regresando...");
+            return true;
+        }
+
+        // Preguntar placa
+        String placa = solicitarPlaca();
+
+        // Encontrar vehiculo
+        Vehiculo vehiculo = vehiculoExiste(placa);
+
+        // Verificar que exista
+        if (vehiculo == null) {
+            System.out.println("No hay ningun vehículo registrado con esa placa.");
 
             return false;
         }
 
-        // Actualizando vehiculo
-        for (Vehiculo vehiculo : listaVehiculos) {
-            if (vehiculo.getPlaca() == vehiculoActualizado.getPlaca()) {
-                vehiculo.setMarca(vehiculoActualizado.getMarca());
-                vehiculo.setModelo(vehiculoActualizado.getModelo());
-                vehiculo.setPrecioDiario(vehiculoActualizado.getPrecioDiario());
-                vehiculo.setEstado(vehiculoActualizado.getEstado());
+        // Verificar casteo
+        if ((opcion == 4 || opcion == 5) && !((vehiculo) instanceof CamionetaSUV)) { // Si la opcion elegida es la 5 o
+                                                                                     // la 6, y el casteo no funciona,
+                                                                                     // devuelve falso
+            System.out.println("Ese vehículo no es una camioneta suv.");
 
-                // Casteando y actualizando según tipo de vehículo
-                if (vehiculoActualizado instanceof CamionetaSUV) {
-                    CamionetaSUV camioneta = (CamionetaSUV) vehiculo;
-                    CamionetaSUV camionetaActualizada = (CamionetaSUV) vehiculoActualizado;
+            return false;
+        } else if ((opcion == 6 || opcion == 7) && !((vehiculo) instanceof CarroSedan)) {
+            System.out.println("Ese vehículo no es un carro sedan");
 
-                    camioneta.setTraccion(camionetaActualizada.getTraccion());
-                    camioneta.setCapacidadMaletero(camionetaActualizada.getCapacidadMaletero());
-                } else if (vehiculoActualizado instanceof CarroSedan) {
-                    CarroSedan carro = (CarroSedan) vehiculo;
-                    CarroSedan carroActualizado = (CarroSedan) vehiculoActualizado;
+            return false;
+        }
 
-                    carro.setTipoCombustible(carroActualizado.getTipoCombustible());
-                    carro.setTransmision(carroActualizado.getTransmision());
-                }
+        // Switch
+        switch (opcion) {
+            case 1 -> {
+
+            }
+            case 2 -> {
+
+            }
+            case 3 -> {
+
+            }
+            case 4 -> {
+
+            }
+            case 5 -> {
+
+            }
+            case 6 -> {
+
+            }
+            case 7 -> {
+
             }
         }
+
+        // LOGICA VIEJA
+        /*
+         * // Verificar que existe
+         * Vehiculo vehiculoEncontrado = vehiculoExiste(vehiculoActualizado.getPlaca());
+         * 
+         * if (vehiculoEncontrado == null) {
+         * System.out.println("ERROR: Vehiculo no encontrado.");
+         * 
+         * return false;
+         * }
+         * 
+         * // Actualizando vehiculo
+         * for (Vehiculo vehiculo : listaVehiculos) {
+         * if (vehiculo.getPlaca() == vehiculoActualizado.getPlaca()) {
+         * vehiculo.setMarca(vehiculoActualizado.getMarca());
+         * vehiculo.setModelo(vehiculoActualizado.getModelo());
+         * vehiculo.setPrecioDiario(vehiculoActualizado.getPrecioDiario());
+         * vehiculo.setEstado(vehiculoActualizado.getEstado());
+         * 
+         * // Casteando y actualizando según tipo de vehículo
+         * if (vehiculoActualizado instanceof CamionetaSUV) {
+         * CamionetaSUV camioneta = (CamionetaSUV) vehiculo;
+         * CamionetaSUV camionetaActualizada = (CamionetaSUV) vehiculoActualizado;
+         * 
+         * camioneta.setTraccion(camionetaActualizada.getTraccion());
+         * camioneta.setCapacidadMaletero(camionetaActualizada.getCapacidadMaletero());
+         * } else if (vehiculoActualizado instanceof CarroSedan) {
+         * CarroSedan carro = (CarroSedan) vehiculo;
+         * CarroSedan carroActualizado = (CarroSedan) vehiculoActualizado;
+         * 
+         * carro.setTipoCombustible(carroActualizado.getTipoCombustible());
+         * carro.setTransmision(carroActualizado.getTransmision());
+         * }
+         * }
+         * }
+         */
 
         // Retornar respuesta
         return true;

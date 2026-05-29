@@ -23,29 +23,25 @@ public class main {
                         int opcionVehiculo = servicioMenu.vehiculos();
 
                         switch (opcionVehiculo) {
-                            case 1: // Agregar
+                            case 1 -> {
                                 servicioVehiculo.agregar();
-                                break;
-                            case 2: // Actualizar
-                                // falta terminar.
-                                break;
-                            case 3: // Consultar
-                                // servicioVehiculo.consultar();
-                                break;
-                            case 4: // Eliminar
-                                // servicioVehiculo.eliminar();
-                                break;
-                            case 5: // Obtener todos
+                            }
+                            case 2 -> {
+                                servicioVehiculo.actualizar();
+                            } // Actualizar
+                            case 3 -> {
+                                servicioVehiculo.consultar();
+                            } // Consultar
+                            case 4 -> {
+                                /* servicioVehiculo.eliminar(); */ } // Eliminar
+                            case 5 -> {
                                 servicioVehiculo.mostrar();
-                                break;
-                            case 6: // Devolverme al menu principal
+                            } // Obtener todos
+                            case 6 -> {
+                                // Devolverme al menu principal
                                 System.out.println("Devolviendo...");
                                 continuar = false;
-
-                                break;
-                            default:
-                                System.out.println("Por favor elige una opcion correcta.");
-                                break;
+                            }
                         }
                     }
 
@@ -58,8 +54,7 @@ public class main {
                     System.out.println("Saliendo...");
 
                     System.exit(0);
-                default:
-                    System.out.println("Por favor elige una opcion correcta.");
+                    break;
             }
         }
     }
