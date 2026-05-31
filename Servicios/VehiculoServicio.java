@@ -23,8 +23,104 @@ public class VehiculoServicio {
     public VehiculoServicio() {
     }
 
-    // Preguntadores
-    public String preguntarTipoCombustible() {
+    // Solicitadores
+    public String solicitarPlaca() {
+        // Placa
+        String placa = "";
+
+        while (!valido) {
+            System.out.print("Ingrese la placa: ");
+            placa = (teclado.nextLine()).toUpperCase();
+
+            valido = validaciones.validarPlaca(placa)
+        }
+
+        resetVariables();
+
+        return placa;
+    }
+    public String solicitarMarca() {
+        // Marca
+        String marca = "";
+
+        while(!valido) {
+            System.out.print("Ingrese la marca: ");
+            marca = teclado.nextLine();
+
+            valido = validaciones.validarTexto(marca)
+        }
+
+        resetVariables();
+
+        return marca;
+    }
+    public int solicitarModelo() {
+        // Modelo
+        int modelo = 0;
+        int añoActual = LocalDate.now().getYear();
+
+        while (!valido) {
+            try {
+                System.out.print("Ingrese el modelo: ");
+                modelo = Integer.parseInt(teclado.nextLine());
+
+                // Validando que el año sea valido
+                if (modelo >= 1800 && modelo <= añoActual) {
+                    valido = true;
+                } else {
+                    System.out.println(
+                            "Debe ser mayor o igual a el año 1800 y menor al año actual (" + añoActual + ")");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Debes ingresar un numero");
+            }
+        }
+
+        resetVariables();
+    }
+    public float solicitarPrecio() {
+        float precioDiario = 0;
+
+        while (!valido) {
+            try {
+                System.out.print("Ingrese el precio diario: ");
+                precioDiario = Float.parseFloat(teclado.nextLine());
+
+                // Validando que el numero sea valido
+                if (precioDiario > 0) {
+                    valido = true;
+                } else {
+                    System.out.println("Debe ser mayor a cero");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Debes ingresar un numero");
+            }
+        }
+
+        resetVariables();
+    }
+    public float solicitarCapacidadMaletero() {
+        float capacidadMaletero = 0;
+
+        while (!valido) {
+            try {
+                System.out.print("Ingrese la capacidad del maletero en litros: ");
+                capacidadMaletero = Float.parseFloat(teclado.nextLine());
+
+                // Validando que el numero sea valido
+                if (capacidadMaletero > 0) {
+                    valido = true;
+                } else {
+                    System.out.println("Debe ser mayor a cero");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Debes ingresar un numero");
+            }
+        }
+
+        resetVariables();
+    }
+    public String solicitarTipoCombustible() {
         System.out.println("Ingrese el tipo de combustible");
         System.out.println("1. Gasolina");
         System.out.println("2. Diesel");
@@ -65,8 +161,7 @@ public class VehiculoServicio {
 
         return tipoCombustible;
     }
-
-    public String preguntarTraccion() {
+    public String solicitarTraccion() {
         System.out.println("Ingrese la traccion del vehiculo");
         System.out.println("1. 4x2");
         System.out.println("2. 4x4");
@@ -102,8 +197,7 @@ public class VehiculoServicio {
 
         return traccion;
     }
-
-    public String preguntarTransmision() {
+    public String solicitarTransmision() {
         System.out.println("Ingrese la transmision del vehiculo");
         System.out.println("1. Automatica");
         System.out.println("2. Manual");
@@ -139,8 +233,7 @@ public class VehiculoServicio {
 
         return transmision;
     }
-
-    public int preguntarTipo() {
+    public int solicitarTipo() {
         System.out.println("¿Qué tipo de vehiculo es?");
         System.out.println("1. Camioneta SUV");
         System.out.println("2. Carro Sedan");
@@ -167,25 +260,6 @@ public class VehiculoServicio {
         resetVariables();
 
         return tipoVehiculo;
-    }
-
-    // Solicitadores
-    public String solicitarPlaca() {
-        // Placa
-        String placa = "";
-
-        while (!valido) {
-            System.out.print("Ingrese la placa: ");
-            placa = (teclado.nextLine()).toUpperCase();
-
-            if (validaciones.validarPlaca(placa)) {
-                valido = true;
-            }
-        }
-
-        resetVariables();
-
-        return placa;
     }
 
     // Utiles
@@ -294,99 +368,22 @@ public class VehiculoServicio {
 
             // Solicitando datos
 
-            // Placa
             String placa = solicitarPlaca();
-
-            resetVariables();
-
-            // Marca
-            String marca = "";
-
-            while (!valido) {
-                System.out.print("Ingrese la marca: ");
-                marca = teclado.nextLine();
-
-                if (validaciones.validarTexto(marca)) {
-                    valido = true;
-                }
-            }
-
-            resetVariables();
-
-            // Modelo
-            int modelo = 0;
-
-            while (!valido) {
-                try {
-                    System.out.print("Ingrese el modelo: ");
-                    modelo = Integer.parseInt(teclado.nextLine());
-
-                    int añoActual = LocalDate.now().getYear();
-
-                    // Validando que el numero sea valido
-                    if (modelo >= 1800 && modelo <= añoActual) {
-                        valido = true;
-                    } else {
-                        System.out.println(
-                                "Debe ser mayor o igual a el año 1800 y menor al año actual (" + añoActual + ")");
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("Debes ingresar un numero");
-                }
-            }
-
-            resetVariables();
-
-            // Precio Diario
-            float precioDiario = 0;
-
-            while (!valido) {
-                try {
-                    System.out.print("Ingrese el precio diario: ");
-                    precioDiario = Float.parseFloat(teclado.nextLine());
-
-                    // Validando que el numero sea valido
-                    if (precioDiario > 0) {
-                        valido = true;
-                    } else {
-                        System.out.println("Debe ser mayor a cero");
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("Debes ingresar un numero");
-                }
-            }
-
-            resetVariables();
+            String marca = solicitarMarca();
+            int modelo = solicitarModelo();
+            float precioDiario = solicitarPrecio();
 
             // Tipo de vehiculo
-            int tipoVehiculo = preguntarTipo();
+            int tipoVehiculo = solciitarTipo();
             String tipo = "";
 
             switch (tipoVehiculo) {
                 case 1: // Camioneta SUV
                     // Traccion
-                    String traccion = preguntarTraccion();
+                    String traccion = solciitarTraccion();
 
                     // Capacidad
-                    float capacidadMaletero = 0;
-
-                    while (!valido) {
-                        try {
-                            System.out.print("Ingrese la capacidad del maletero en litros: ");
-                            capacidadMaletero = Float.parseFloat(teclado.nextLine());
-
-                            // Validando que el numero sea valido
-                            if (capacidadMaletero > 0) {
-                                valido = true;
-                            } else {
-                                System.out.println("Debe ser mayor a cero");
-                            }
-                        } catch (NumberFormatException e) {
-                            System.out.println("Debes ingresar un numero");
-                        }
-                    }
-
-                    resetVariables();
+                    float capacidadMaletero = solicitarCapacidadMaletero();
 
                     // Creación de vehiculo
                     nuevoVehiculo = new CamionetaSUV(placa, marca, modelo, precioDiario, traccion, capacidadMaletero);
@@ -395,10 +392,10 @@ public class VehiculoServicio {
                     break;
                 case 2: // Carro Sedan
                     // Tipo de combustible
-                    String tipoCombustible = preguntarTipoCombustible();
+                    String tipoCombustible = solciitarTipoCombustible();
 
                     // Transmision
-                    String transmision = preguntarTransmision();
+                    String transmision = solciitarTransmision();
 
                     // Creacion de vehiculo
                     nuevoVehiculo = new CarroSedan(placa, marca, modelo, precioDiario, tipoCombustible,
@@ -455,102 +452,88 @@ public class VehiculoServicio {
     }
 
     public boolean actualizar() {
-        // Recibir opción de menú
-        int opcion = menu.actualizarVehiculo();
+        do {
+            // Recibir opción de menú
+            int opcion = menu.actualizarVehiculo();
 
-        // Verificar si el usuario desea salir
-        if (opcion == 8) {
-            System.out.println("Regresando...");
-            return true;
-        }
-
-        // Preguntar placa
-        String placa = solicitarPlaca();
-
-        // Encontrar vehiculo
-        Vehiculo vehiculo = vehiculoExiste(placa);
-
-        // Verificar que exista
-        if (vehiculo == null) {
-            System.out.println("No hay ningun vehículo registrado con esa placa.");
-
-            return false;
-        }
-
-        // Verificar casteo
-        if ((opcion == 4 || opcion == 5) && !((vehiculo) instanceof CamionetaSUV)) { // Si la opcion elegida es la 5 o
-                                                                                     // la 6, y el casteo no funciona,
-                                                                                     // devuelve falso
-            System.out.println("Ese vehículo no es una camioneta suv.");
-
-            return false;
-        } else if ((opcion == 6 || opcion == 7) && !((vehiculo) instanceof CarroSedan)) {
-            System.out.println("Ese vehículo no es un carro sedan");
-
-            return false;
-        }
-
-        // Switch
-        switch (opcion) {
-            case 1 -> {
-
+            // Verificar si el usuario desea salir
+            if (opcion == 8) {
+                System.out.println("Regresando...");
+                return true;
             }
-            case 2 -> {
 
+            // Preguntar placa
+            String placa = solicitarPlaca();
+
+            // Encontrar vehiculo
+            Vehiculo vehiculo = vehiculoExiste(placa);
+
+            // Verificar que exista
+            if (vehiculo == null) {
+                System.out.println("No hay ningun vehículo registrado con esa placa.");
+
+                return false;
             }
-            case 3 -> {
 
+            // Verificar casteo
+            if ((opcion == 4 || opcion == 5) && !((vehiculo) instanceof CamionetaSUV)) { // Si la opcion elegida es la 4 o
+                                                                                        // la 5, y el casteo no funciona,
+                                                                                        // devuelve falso
+                System.out.println("Ese vehículo no es una camioneta suv.");
+
+                return false;
+            } else if ((opcion == 6 || opcion == 7) && !((vehiculo) instanceof CarroSedan)) {
+                System.out.println("Ese vehículo no es un carro sedan");
+
+                return false;
             }
-            case 4 -> {
 
+            // Switch
+            switch (opcion) {
+                case 1 -> { // Marca
+                    String marca = solicitarMarca();
+
+                    vehiculo.setMarca(marca);
+                }
+                case 2 -> { // Modelo
+                    int modelo = solicitarModelo();
+
+                    vehiculo.setModelo(modelo);
+                }
+                case 3 -> { // Precio Diario
+                    float precioDiario = solicitarPrecio();
+
+                    vehiculo.setPrecioDiario(precio);
+                }
+                case 4 -> { // Tracción (Camioneta SUV)
+                    CamionetaSUV camioneta = (CamionetaSUV) vehiculo; // Casteo
+                    String traccion = solicitarTraccion();
+
+                    camioneta.setTraccion(traccion);
+                }
+                case 5 -> { // Capacidad de Maletero (Camioneta SUV)
+                    CamionetaSUV camioneta = (CamionetaSUV) vehiculo; // Casteo
+                    float capacidadMaletero = solicitarCapacidadMaletero();
+
+                    camioneta.setCapacidadMaletero(capacidadMaletero);
+                }
+                case 6 -> { // Tipo de Combustible (Carro Sedan)
+                    CarroSedan carro = (CarroSedan) vehiculo;
+                    String tipoCombustible = solicitarTipoCombustible();
+
+                    carro.setTipoCombustible(tipoCombustible);
+                }
+                case 7 -> { // Transmisión (Carro Sedan)
+                    CarroSedan carro = (CarroSedan) vehiculo;
+                    int traccion = solicitarTraccion();
+
+                    carro.setTraccion(traccion);
+                }
             }
-            case 5 -> {
 
-            }
-            case 6 -> {
-
-            }
-            case 7 -> {
-
-            }
-        }
-
-        // LOGICA VIEJA
-        /*
-         * // Verificar que existe
-         * Vehiculo vehiculoEncontrado = vehiculoExiste(vehiculoActualizado.getPlaca());
-         * 
-         * if (vehiculoEncontrado == null) {
-         * System.out.println("ERROR: Vehiculo no encontrado.");
-         * 
-         * return false;
-         * }
-         * 
-         * // Actualizando vehiculo
-         * for (Vehiculo vehiculo : listaVehiculos) {
-         * if (vehiculo.getPlaca() == vehiculoActualizado.getPlaca()) {
-         * vehiculo.setMarca(vehiculoActualizado.getMarca());
-         * vehiculo.setModelo(vehiculoActualizado.getModelo());
-         * vehiculo.setPrecioDiario(vehiculoActualizado.getPrecioDiario());
-         * vehiculo.setEstado(vehiculoActualizado.getEstado());
-         * 
-         * // Casteando y actualizando según tipo de vehículo
-         * if (vehiculoActualizado instanceof CamionetaSUV) {
-         * CamionetaSUV camioneta = (CamionetaSUV) vehiculo;
-         * CamionetaSUV camionetaActualizada = (CamionetaSUV) vehiculoActualizado;
-         * 
-         * camioneta.setTraccion(camionetaActualizada.getTraccion());
-         * camioneta.setCapacidadMaletero(camionetaActualizada.getCapacidadMaletero());
-         * } else if (vehiculoActualizado instanceof CarroSedan) {
-         * CarroSedan carro = (CarroSedan) vehiculo;
-         * CarroSedan carroActualizado = (CarroSedan) vehiculoActualizado;
-         * 
-         * carro.setTipoCombustible(carroActualizado.getTipoCombustible());
-         * carro.setTransmision(carroActualizado.getTransmision());
-         * }
-         * }
-         * }
-         */
+            // Preguntar si quiere seguir agregando
+            continuar = menu.preguntarContinuar() == 1; // Si la opción es 1, devuelve true. Si no es 1, devuelve false    
+        } while(continuar) 
 
         // Retornar respuesta
         return true;
@@ -581,6 +564,9 @@ public class VehiculoServicio {
 
         // Eliminar vehiculo
         listaVehiculos.remove(vehiculoEncontrado);
+
+        // Eliminar contratos con ese vehiculo
+        //...
 
         // Retornar respuesta
         return true;
