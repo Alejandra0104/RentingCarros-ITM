@@ -28,15 +28,16 @@ public class main {
                             }
                             case 2 -> {
                                 servicioVehiculo.actualizar();
-                            } // Actualizar
+                            }
                             case 3 -> {
                                 servicioVehiculo.consultar();
-                            } // Consultar
+                            }
                             case 4 -> {
-                                /* servicioVehiculo.eliminar(); */ } // Eliminar
+                                servicioVehiculo.eliminar();
+                            }
                             case 5 -> {
                                 servicioVehiculo.mostrar();
-                            } // Obtener todos
+                            }
                             case 6 -> {
                                 // Devolverme al menu principal
                                 System.out.println("Devolviendo...");
