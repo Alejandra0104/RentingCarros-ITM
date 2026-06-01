@@ -108,12 +108,35 @@ public class MenuServicio {
                 System.out.println("Ingresa una opcion valida.");
             } catch (NumberFormatException error) {
                 System.out.print("Escriba por favor un numero.");
-
-                return 0;
             }
         }
     }
 
+    public int exportar() {
+        while(true) {
+            try {
+                System.out.println("---- Menu de exportar ----");
+                System.out.println("1. Exportar clientes ");
+                System.out.println("2. Exportar vehiculos ");
+                System.out.println("3. Exportar contratos ");
+                System.out.println("4. Exportar registros ");
+                System.out.println("5. Salir");
+
+                System.out.print("Ingrese la opcion que desea realizar: ");
+                int opcion = Integer.parseInt(teclado);
+
+                // Validar opcion
+                if(opcion > 0 && opcion < 6) {
+                    return opcion;
+                }
+
+                System.out.println("Ingrese una opción válida");
+            } catch (NumberFormatException e) {
+                System.out.println("Escriba por favor un numero");
+            }
+        }
+    }
+    
     // Menus de Actualizacion
     public int actualizarCliente() {
         while (true) {

@@ -49,6 +49,9 @@ public class main {
                         }
                         
                     }
+
+                    continuar = true; // Reseteando variable
+
                     break;
                 case 2: // Seccion Vehiculos
                     while (continuar) {
@@ -79,6 +82,9 @@ public class main {
                         }
                         
                     }
+
+                    continuar = true; // Reseteando variable
+
                     break;
                 case 3: // Seccion Contratos
                     while(continuar){
@@ -112,8 +118,37 @@ public class main {
                                 break;
                         }
                     }
+
+                    continuar = true; // Reseteando variable
+
                     break;
-                case 4: // Imprimir datos
+                case 4: // Exportar datos
+                    int opcionExportar = servicioMenu.exportar();
+
+                    while(continuar) {
+                        switch(opcionExportar) {
+                            case 1:
+                                // Clientes
+                                break;
+                            case 2:
+                                // Vehiculos
+                                break;
+                            case 3:
+                                // Contratos
+                                break;
+                            case 4:
+                                // ...
+                                break;
+                            case 5:
+                                System.out.println("Devolviendo...");
+                                continuar = false;
+                                
+                                break;
+                        }
+                    }
+
+                    continuar = true; // Reseteando variable
+
                     break;
                 case 5: // Salir del sistema
                     System.out.println("Saliendo...");
