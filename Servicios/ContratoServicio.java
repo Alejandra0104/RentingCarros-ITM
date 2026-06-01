@@ -10,7 +10,7 @@ public class ContratoServicio
 {
     LinkedList<ContratoRenting> contratos = new LinkedList<>();
     Scanner sc = new Scanner(System.in);
-    Validaciones validacion = new Validaciones();
+    ValidacionServicio validacion = new ValidacionServicio();
 
     //si esta vble cambia, es porque encontro el nuevoContrato en modificar, consultar y eliminar
     boolean contratoEncontrado = false;
@@ -249,7 +249,7 @@ public class ContratoServicio
         }
     }
     
-    public LinkedList<ContratoRenting> finalizarContrato(LinkedList<ContratoRenting> contratos) {
+    public LinkedList<ContratoRenting> finalizarContrato() {
 
         String idContrato;
         do{
