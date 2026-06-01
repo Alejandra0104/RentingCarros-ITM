@@ -7,10 +7,10 @@ import java.util.Scanner;
 
 public class ClienteServicio {
     private static List<Cliente> listaCliente = new ArrayList<>();
-    private Menu servicioMenu = new Menu();
+    private MenuServicio servicioMenu = new MenuServicio();
 
     Scanner sc =  new Scanner(System.in);
-    private Validaciones validacion = new Validaciones();
+    private ValidacionServicio validacion = new ValidacionServicio();
 
     public List<Cliente>RegistrarCliente(){
         boolean pedir = true;
@@ -67,7 +67,7 @@ public class ClienteServicio {
             System.out.println("Ingrese el Nombre del Cliente ");
             nuevoCliente.setNombre(sc.nextLine());
 
-            while (!validacion.ValidarTexto(nuevoCliente.getNombre())) { 
+            while (!validacion.validarTexto(nuevoCliente.getNombre())) { 
                     System.out.println("Ingrese nuevamente el nombre: ");
                     nuevoCliente.setNombre(sc.nextLine());
                 }
@@ -75,7 +75,7 @@ public class ClienteServicio {
             System.out.println("Ingrese el Apellido del Cliente ");
             nuevoCliente.setApellido(sc.nextLine());
 
-            while (!validacion.ValidarTexto(nuevoCliente.getApellido())) { 
+            while (!validacion.validarTexto(nuevoCliente.getApellido())) { 
                     System.out.println("Ingrese nuevamente el apellido: ");
                     nuevoCliente.setApellido(sc.nextLine());
                 }
@@ -262,7 +262,7 @@ public class ClienteServicio {
             System.out.println("Ingrese el Nombre del cliente ");
             c.setNombre(sc.nextLine());
 
-            while (!validacion.ValidarTexto(c.getNombre())) {
+            while (!validacion.validarTexto(c.getNombre())) {
                 
                 System.out.println("Ingrese nuevamente el nombre: ");
                 c.setNombre(sc.nextLine());
@@ -273,7 +273,7 @@ public class ClienteServicio {
             System.out.println("Ingrese el Apellido del cliente ");
             c.setApellido(sc.nextLine());
 
-            while (!validacion.ValidarTexto(c.getApellido())) {
+            while (!validacion.validarTexto(c.getApellido())) {
                 
                 System.out.println("Ingrese nuevamente el apellido: ");
                 c.setApellido(sc.nextLine());
@@ -461,8 +461,6 @@ public class ClienteServicio {
             System.out.println("Direccion: " + cliente.getDireccion());
             System.out.println("Licencia de conduccion: " + cliente.getLicenciaConduccion());
             System.out.println("------------------------------");  
-            
-            
         } 
         return listaCliente;
 
