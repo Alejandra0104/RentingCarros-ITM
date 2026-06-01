@@ -32,7 +32,7 @@ public class VehiculoServicio {
             System.out.print("Ingrese la placa: ");
             placa = (teclado.nextLine()).toUpperCase();
 
-            valido = validaciones.validarPlaca(placa)
+            valido = validaciones.validarPlaca(placa);
         }
 
         resetVariables();
@@ -47,7 +47,7 @@ public class VehiculoServicio {
             System.out.print("Ingrese la marca: ");
             marca = teclado.nextLine();
 
-            valido = validaciones.validarTexto(marca)
+            valido = validaciones.validarTexto(marca);
         }
 
         resetVariables();
@@ -77,6 +77,8 @@ public class VehiculoServicio {
         }
 
         resetVariables();
+
+        return modelo;
     }
     public float solicitarPrecio() {
         float precioDiario = 0;
@@ -98,6 +100,8 @@ public class VehiculoServicio {
         }
 
         resetVariables();
+
+        return precioDiario;
     }
     public float solicitarCapacidadMaletero() {
         float capacidadMaletero = 0;
@@ -119,6 +123,8 @@ public class VehiculoServicio {
         }
 
         resetVariables();
+
+        return capacidadMaletero;
     }
     public String solicitarTipoCombustible() {
         System.out.println("Ingrese el tipo de combustible");
@@ -374,13 +380,13 @@ public class VehiculoServicio {
             float precioDiario = solicitarPrecio();
 
             // Tipo de vehiculo
-            int tipoVehiculo = solciitarTipo();
+            int tipoVehiculo = solicitarTipo();
             String tipo = "";
 
             switch (tipoVehiculo) {
                 case 1: // Camioneta SUV
                     // Traccion
-                    String traccion = solciitarTraccion();
+                    String traccion = solicitarTraccion();
 
                     // Capacidad
                     float capacidadMaletero = solicitarCapacidadMaletero();
@@ -392,10 +398,10 @@ public class VehiculoServicio {
                     break;
                 case 2: // Carro Sedan
                     // Tipo de combustible
-                    String tipoCombustible = solciitarTipoCombustible();
+                    String tipoCombustible = solicitarTipoCombustible();
 
                     // Transmision
-                    String transmision = solciitarTransmision();
+                    String transmision = solicitarTransmision();
 
                     // Creacion de vehiculo
                     nuevoVehiculo = new CarroSedan(placa, marca, modelo, precioDiario, tipoCombustible,
@@ -503,7 +509,7 @@ public class VehiculoServicio {
                 case 3 -> { // Precio Diario
                     float precioDiario = solicitarPrecio();
 
-                    vehiculo.setPrecioDiario(precio);
+                    vehiculo.setPrecioDiario(precioDiario);
                 }
                 case 4 -> { // Tracción (Camioneta SUV)
                     CamionetaSUV camioneta = (CamionetaSUV) vehiculo; // Casteo
@@ -525,15 +531,15 @@ public class VehiculoServicio {
                 }
                 case 7 -> { // Transmisión (Carro Sedan)
                     CarroSedan carro = (CarroSedan) vehiculo;
-                    int traccion = solicitarTraccion();
+                    String transmision = solicitarTransmision();
 
-                    carro.setTraccion(traccion);
+                    carro.setTransmision(transmision);
                 }
             }
 
             // Preguntar si quiere seguir agregando
             continuar = menu.preguntarContinuar() == 1; // Si la opción es 1, devuelve true. Si no es 1, devuelve false    
-        } while(continuar) 
+        } while(continuar); 
 
         // Retornar respuesta
         return true;

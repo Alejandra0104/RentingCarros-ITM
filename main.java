@@ -33,7 +33,7 @@ public class main {
                                 servicioVehiculo.consultar();
                             }
                             case 4 -> {
-                                servicioVehiculo.eliminar();
+                                //servicioVehiculo.eliminar();
                             }
                             case 5 -> {
                                 servicioVehiculo.mostrar();
