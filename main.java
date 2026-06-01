@@ -1,3 +1,4 @@
+import Servicios.ClienteServicio;
 import Servicios.MenuServicio;
 import Servicios.VehiculoServicio;
 
@@ -7,6 +8,7 @@ public class main {
 
         // Inicializacion de Servicios
         VehiculoServicio servicioVehiculo = new VehiculoServicio();
+        ClienteServicio servicioCliente = new ClienteServicio();
 
         // Mostrar menú general de forma infinita hasta que el usuario desee salir
         while (true) {
@@ -16,6 +18,35 @@ public class main {
 
             switch (opcionGeneral) {
                 case 1: // Seccion Clientes
+                    while (continuar) {
+                        int opcionClientes = servicioMenu.clientes();
+
+                        switch(opcionClientes) {
+                            case 1: // Registrar
+                                servicioCliente.RegistrarCliente();
+                                break;
+                            case 2: // Modificar
+                                servicioCliente.Modificar();
+                                break;   
+                            case 3: // Consultar
+                                servicioCliente.Consultar(); 
+                                break;  
+                            case 4: // Eliminar
+                                servicioCliente.Eliminar();
+                                break;  
+                            case 5:// Ver todos los Clientes
+                                servicioCliente.VerClientes();
+                                break;    
+                            case 6: // Dvolverme al menu principal
+                                System.out.println("Devolviendo...");
+                                continuar = false;
+                                break;   
+                            default:
+                                System.out.println("Por favor elige una opcion correcta.");
+                                break;          
+                        }
+                        
+                    }
                     break;
                 case 2: // Seccion Vehiculos
                     while (continuar) {
@@ -44,8 +75,8 @@ public class main {
                                 continuar = false;
                             }
                         }
+                        
                     }
-
                     break;
                 case 3: // Seccion Contratos
                     break;
@@ -60,3 +91,4 @@ public class main {
         }
     }
 }
+

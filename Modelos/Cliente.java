@@ -1,6 +1,6 @@
 package Modelos;
 
-class Cliente {
+public class Cliente {
     private String Cedula;
     private String Nombre;
     private String Apellido;
