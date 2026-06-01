@@ -2,16 +2,19 @@ package Servicios;
 
 import Modelos.CamionetaSUV;
 import Modelos.CarroSedan;
+import Modelos.ContratoRenting;
 import Modelos.Vehiculo;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
 public class VehiculoServicio {
-    private final static List<Vehiculo> listaVehiculos = new ArrayList<>();
+    private static List<Vehiculo> listaVehiculos = new ArrayList<>();
 
     public ValidacionServicio validaciones = new ValidacionServicio();
+    public ContratoServicio servicioContrato = new ContratoServicio();
     public MenuServicio menu = new MenuServicio();
 
     private final Scanner teclado = new Scanner(System.in);
@@ -69,7 +72,7 @@ public class VehiculoServicio {
                     valido = true;
                 } else {
                     System.out.println(
-                            "Debe ser mayor o igual a el año 1800 y menor al año actual (" + añoActual + ")");
+                            "Debe ser mayor o igual a el año 1800 y menor o igual al año actual (" + añoActual + ")");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Debes ingresar un numero");
@@ -269,7 +272,7 @@ public class VehiculoServicio {
     }
 
     // Utiles
-    public void mostrarInfoAdicional(Vehiculo vehiculo) {
+    public boolean mostrarInfoAdicional(Vehiculo vehiculo) {
         // Verificando qué vehiculo es para realizar casting y obtener datos adicionales
         if (vehiculo instanceof CamionetaSUV) {
             // Si es una camioneta suv
@@ -288,11 +291,15 @@ public class VehiculoServicio {
         } else {
             System.out.println("Tipo: Vehiculo Tradicional");
         }
+
+        return true;
     }
 
-    public void resetVariables() {
+    public boolean resetVariables() {
         continuar = true;
         valido = false;
+
+        return true;
     }
 
     // Validaciones Lógicas
@@ -537,6 +544,9 @@ public class VehiculoServicio {
                 }
             }
 
+            // Imprimir resultado
+            System.out.println("---VEHICULO ACTUALIZADO CON EXITO---");
+
             // Preguntar si quiere seguir agregando
             continuar = menu.preguntarContinuar() == 1; // Si la opción es 1, devuelve true. Si no es 1, devuelve false    
         } while(continuar); 
@@ -558,7 +568,10 @@ public class VehiculoServicio {
         return false;
     }
 
-    public boolean eliminar(String placa) {
+    public boolean eliminar() {
+        // Solicitar placa
+        String placa = solicitarPlaca();
+
         // Verificar que existe
         Vehiculo vehiculoEncontrado = vehiculoExiste(placa);
 
@@ -567,14 +580,33 @@ public class VehiculoServicio {
 
             return false;
         }
-
+ 
         // Eliminar vehiculo
         listaVehiculos.remove(vehiculoEncontrado);
 
         // Eliminar contratos con ese vehiculo
-        //...
+        LinkedList<ContratoRenting> contratos = servicioContrato.getContratos(); // Conseguir lista de contratos
+
+        // Eliminar contratos con ese vehiculo
+        contratos.removeIf(contrato -> contrato.getPlacaVehiculo().equals(placa));
+
+        // Actualizar lista de contratos en servicio Contrato
+        servicioContrato.setContratos(contratos);
 
         // Retornar respuesta
+        System.out.println("Vehiculo eliminado con exito.");
+
+        return true;
+    }
+
+    // Conseguir y editar lista de vehiculos (para exportar)
+    public List<Vehiculo> getVehiculos() {
+        return listaVehiculos;
+    }
+
+    public boolean setContratos(List<Vehiculo> vehiculos) {
+        VehiculoServicio.listaVehiculos = vehiculos;
+
         return true;
     }
 }

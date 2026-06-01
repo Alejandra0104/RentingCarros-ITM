@@ -119,8 +119,8 @@ public class MenuServicio {
                 System.out.println("1. Exportar clientes ");
                 System.out.println("2. Exportar vehiculos ");
                 System.out.println("3. Exportar contratos ");
-                System.out.println("4. Exportar registros ");
-                System.out.println("5. Salir");
+                System.out.println("4. Exportar informe General");
+                System.out.println("5. Devolver al menu principal");
 
                 System.out.print("Ingrese la opcion que desea realizar: ");
                 int opcion = Integer.parseInt(teclado.nextLine());

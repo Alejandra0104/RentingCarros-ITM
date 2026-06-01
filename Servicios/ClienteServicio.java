@@ -26,12 +26,12 @@ public class ClienteServicio {
                 //valido cédula
                 valido = false;
 
-                System.out.println("Ingrese la cedula del cliente: ");
+                System.out.print("Ingrese la cedula del cliente: ");
                 nuevoCliente.setCedula(sc.nextLine());
 
                 // Agrego el while para que valide el Regex
                 while (!validacion.ValidarNumeros(nuevoCliente.getCedula())) { 
-                    System.out.println("Ingrese nuevamente la cedula: ");
+                    System.out.print("Ingrese nuevamente la cedula: ");
                     nuevoCliente.setCedula(sc.nextLine());
                 }
 
@@ -64,19 +64,19 @@ public class ClienteServicio {
                 }
             }
 
-            System.out.println("Ingrese el Nombre del Cliente ");
+            System.out.print("Ingrese el Nombre del Cliente ");
             nuevoCliente.setNombre(sc.nextLine());
 
             while (!validacion.validarTexto(nuevoCliente.getNombre())) { 
-                    System.out.println("Ingrese nuevamente el nombre: ");
+                    System.out.print("Ingrese nuevamente el nombre: ");
                     nuevoCliente.setNombre(sc.nextLine());
                 }
 
-            System.out.println("Ingrese el Apellido del Cliente ");
+            System.out.print("Ingrese el Apellido del Cliente ");
             nuevoCliente.setApellido(sc.nextLine());
 
             while (!validacion.validarTexto(nuevoCliente.getApellido())) { 
-                    System.out.println("Ingrese nuevamente el apellido: ");
+                    System.out.print("Ingrese nuevamente el apellido: ");
                     nuevoCliente.setApellido(sc.nextLine());
                 }
 
@@ -86,11 +86,11 @@ public class ClienteServicio {
 
                 valido = false;
 
-                System.out.println("Ingrese el Telefono del Cliente ");
+                System.out.print("Ingrese el Telefono del Cliente ");
                 nuevoCliente.setTelefono(sc.nextLine());
 
                 while (!validacion.ValidarNumeros(nuevoCliente.getTelefono())) { 
-                    System.out.println("Ingrese nuevamente el Telefono: ");
+                    System.out.print("Ingrese nuevamente el Telefono: ");
                     nuevoCliente.setTelefono(sc.nextLine());
                 }
                 // Validar que el telefono no sea igual a la cedula
@@ -114,11 +114,11 @@ public class ClienteServicio {
             
             }
 
-            System.out.println("Ingrese la direccion de Cliente ");
+            System.out.print("Ingrese la direccion de Cliente ");
             nuevoCliente.setDireccion(sc.nextLine());
 
             while (!validacion.ValidarDireccion(nuevoCliente.getDireccion())) { 
-                System.out.println("Ingrese nuevamente la direccion ");
+                System.out.print("Ingrese nuevamente la direccion ");
                 nuevoCliente.setDireccion(sc.nextLine());
 
                 
@@ -129,11 +129,11 @@ public class ClienteServicio {
             while (valido) {
                 valido = false;
 
-                System.out.println("Ingrese la licencia de conduccion del cliente: ");
+                System.out.print("Ingrese la licencia de conduccion del cliente: ");
                 nuevoCliente.setLicenciaConduccion(sc.nextLine());
 
                 while (!validacion.ValidarNumeros(nuevoCliente.getLicenciaConduccion())) { 
-                    System.out.println("Ingrese nuevamente la licencia de conduccion: ");
+                    System.out.print("Ingrese nuevamente la licencia de conduccion: ");
                     nuevoCliente.setLicenciaConduccion(sc.nextLine());
                 }
 

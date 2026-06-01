@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class ContratoServicio
 {
-    LinkedList<ContratoRenting> contratos = new LinkedList<>();
+    static LinkedList<ContratoRenting> contratos = new LinkedList<>();
     Scanner sc = new Scanner(System.in);
     ValidacionServicio validacion = new ValidacionServicio();
 
@@ -21,8 +21,7 @@ public class ContratoServicio
         String opcion = "";    
         while (pedir) {
             ContratoRenting nuevoContrato = new ContratoRenting ();
-
-                        
+            
              //valido que no exista idcontrato
             while (valido) {
                 valido = false;
@@ -50,15 +49,15 @@ public class ContratoServicio
                     }
                 }
             }
-            /*while (valido) {
+            while (valido) {
                 //valido cédula
                 valido = false;
  
                 System.out.println("Ingrese la cedula del cliente: ");
-                nuevoCliente.setCedulaCliente(sc.nextLine());
+                nuevoContrato.setCedulaCliente(sc.nextLine());
  
                 // Agrego el while para que valide el Regex
-                while (!validacion.ValidarNumeros(nuevoCliente.getCedulaClente())) {
+                while (!validacion.ValidarNumeros(nuevoContrato.getCedulaCliente())) {
                     System.out.println("Ingrese nuevamente la cedula: ");
                     nuevoContrato.setCedulaCliente(sc.nextLine());
                 }
@@ -67,11 +66,11 @@ public class ContratoServicio
  
                     if (contrato.getCedulaCliente().equalsIgnoreCase(nuevoContrato.getCedulaCliente())) {
  
-                        System.out.println("El cliente ya tiene un vehículo alquilado);
+                        System.out.println("El cliente ya tiene un vehículo alquilado");
  
                         System.out.println("Y. Desea Regiastrar otro cliente?");
                         System.out.println("N. Volver al menú principal");
-                        String opcion = sc.nextLine();
+                        opcion = sc.nextLine();
  
                         while (!validacion.ValidarDimension(opcion))
                         {
@@ -91,9 +90,9 @@ public class ContratoServicio
                    
                 }
             }
-  */
+
             //valido vehiculo no esté alquilado
-            /*valido = true;
+            valido = true;
             while (valido) {
 
                 valido = false;
@@ -116,7 +115,7 @@ public class ContratoServicio
                         valido = true;
                     }
                 }
-            }*/
+            }
             valido = true;
            
             String inicio = validacion.validarFecha("Ingrese la fecha de inicio (AAAA-MM-DD): ");
@@ -314,8 +313,7 @@ public class ContratoServicio
     
     // Este metodo lo podemos sobrecargar con las otras entidades 
     public void imprimir(ContratoRenting nuevoContrato) {
-
-        System.out.println("----------------------------");
+        System.out.println("-------------------------- --");
         System.out.println("Id del nuevoContrato: " + nuevoContrato.getIdContrato());
         System.out.println("Cédula del cliente: " + nuevoContrato.getCedulaCliente());
         System.out.println("Placa del vehículo: " + nuevoContrato.getPlacaVehiculo());
@@ -325,5 +323,16 @@ public class ContratoServicio
         System.out.println("Valor total: " + nuevoContrato.getValorTotal());
         System.out.println("Estado: " + nuevoContrato.getEstado());
         System.out.println("------------------------------");
+    }
+
+    // Conseguir y editar lista de contratos (para exportar)
+    public LinkedList<ContratoRenting> getContratos() {
+        return contratos;
+    }
+
+    public boolean setContratos(LinkedList<ContratoRenting> contratos) {
+        ContratoServicio.contratos = contratos;
+
+        return true;
     }
 }

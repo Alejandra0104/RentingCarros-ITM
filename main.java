@@ -1,5 +1,6 @@
 import Servicios.ClienteServicio;
 import Servicios.ContratoServicio;
+import Servicios.ExportarServicio;
 import Servicios.MenuServicio;
 import Servicios.VehiculoServicio;
 
@@ -11,6 +12,7 @@ public class main {
         VehiculoServicio servicioVehiculo = new VehiculoServicio();
         ClienteServicio servicioCliente = new ClienteServicio();
         ContratoServicio servicioContrato = new ContratoServicio();
+        ExportarServicio servicioExportar = new ExportarServicio();
 
         // Mostrar menú general de forma infinita hasta que el usuario desee salir
         while (true) {
@@ -47,7 +49,6 @@ public class main {
                                 System.out.println("Por favor elige una opcion correcta.");
                                 break;          
                         }
-                        
                     }
 
                     continuar = true; // Reseteando variable
@@ -69,7 +70,7 @@ public class main {
                                 servicioVehiculo.consultar();
                             }
                             case 4 -> {
-                                //servicioVehiculo.eliminar();
+                                servicioVehiculo.eliminar();
                             }
                             case 5 -> {
                                 servicioVehiculo.mostrar();
@@ -123,21 +124,21 @@ public class main {
 
                     break;
                 case 4: // Exportar datos
-                    int opcionExportar = servicioMenu.exportar();
-
                     while(continuar) {
+                        int opcionExportar = servicioMenu.exportar();
+
                         switch(opcionExportar) {
                             case 1:
                                 // Clientes
                                 break;
                             case 2:
-                                // Vehiculos
+                                servicioExportar.vehiculos();
                                 break;
                             case 3:
                                 // Contratos
                                 break;
                             case 4:
-                                // ...
+                                // Informe general
                                 break;
                             case 5:
                                 System.out.println("Devolviendo...");
