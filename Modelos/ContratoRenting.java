@@ -1,5 +1,7 @@
 package Modelos;
 
+import java.time.LocalDate;
+
 public class ContratoRenting {
 
     private String IdContrato;
@@ -9,12 +11,13 @@ public class ContratoRenting {
     private String FechaFin;
     private int TotalDias;
     private float ValorTotal;
+    private String Estado;
     
     public ContratoRenting() {
     }
 
     public ContratoRenting(String idContrato, String cedulaCliente, String placaVehiculo, String fechaInicio,
-            String fechaFin, int totalDias, float valorTotal) {
+            String fechaFin, int totalDias, float valorTotal, String estado) {
         IdContrato = idContrato;
         CedulaCliente = cedulaCliente;
         PlacaVehiculo = placaVehiculo;
@@ -22,6 +25,7 @@ public class ContratoRenting {
         FechaFin = fechaFin;
         TotalDias = totalDias;
         ValorTotal = valorTotal;
+        Estado = estado;
     }
 
     public String getIdContrato() {
@@ -80,12 +84,26 @@ public class ContratoRenting {
         ValorTotal = valorTotal;
     }
 
-    @Override
-    public String toString() {
-        return "ContratoRenting [IdContrato=" + IdContrato + ", CedulaCliente=" + CedulaCliente + ", PlacaVehiculo="
-                + PlacaVehiculo + ", FechaInicio=" + FechaInicio + ", FechaFin=" + FechaFin + ", TotalDias=" + TotalDias
-                + ", ValorTotal=" + ValorTotal + "]";
+    public String getEstado() {
+
+        LocalDate fechaFinContrato = LocalDate.parse(FechaFin);
+
+        if (LocalDate.now().isAfter(fechaFinContrato)) {
+
+            return "FINALIZADO";
+        }
+
+        return "ACTIVO";
     }
 
-    
+    @Override
+    public String toString() {
+        return "ContratoRenting [IdContrato: " + IdContrato 
+              + ", CedulaCliente: " + CedulaCliente 
+              + ", PlacaVehiculo: " + PlacaVehiculo 
+              + ", FechaInicio: " + FechaInicio 
+              + ", FechaFin: " + FechaFin 
+              + ", TotalDias: " + TotalDias
+              + ", ValorTotal: " + ValorTotal + "]";
+    }
 }

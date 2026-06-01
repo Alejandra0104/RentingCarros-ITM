@@ -1,4 +1,5 @@
 import Servicios.ClienteServicio;
+import Servicios.ContratoServicio;
 import Servicios.MenuServicio;
 import Servicios.VehiculoServicio;
 
@@ -9,6 +10,7 @@ public class main {
         // Inicializacion de Servicios
         VehiculoServicio servicioVehiculo = new VehiculoServicio();
         ClienteServicio servicioCliente = new ClienteServicio();
+        ContratoServicio servicioContrato = new ContratoServicio();
 
         // Mostrar menú general de forma infinita hasta que el usuario desee salir
         while (true) {
@@ -79,6 +81,37 @@ public class main {
                     }
                     break;
                 case 3: // Seccion Contratos
+                    while(continuar){
+                        int opcionContrato = servicioMenu.contratos();
+                        switch (opcionContrato) {
+                            case 1:// Registrar contrato
+                                servicioContrato.RegistrarContrato();
+                                break;
+                            case 2:
+                                //ModificarContrato
+                                servicioContrato.modificarContrato();
+                                break;
+                            case 3:
+                                //Consultar contrato
+                                servicioContrato.Consultar();
+                                break;
+                            case 4:
+                                //Eliminar contrato
+                                servicioContrato.finalizarContrato();
+                                break;
+                            case 5:
+                                //Mostrar todos los contratos  
+                                servicioContrato.imprimirInforme();
+                                break;
+                            case 6:// Devolverme al menu principal
+                                System.out.println("Devolviendo...");
+                                continuar = false;
+                                break;
+                            default:
+                                System.out.println("Opción no valida, reintente...");
+                                break;
+                        }
+                    }
                     break;
                 case 4: // Imprimir datos
                     break;
