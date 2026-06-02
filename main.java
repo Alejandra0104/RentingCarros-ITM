@@ -1,11 +1,9 @@
 import Servicios.ClienteServicio;
 import Servicios.ContratoServicio;
-import Servicios.ExportarContratos;
 import Servicios.ExportarServicio;
 import Servicios.ImportarServicio;
 import Servicios.MenuServicio;
 import Servicios.VehiculoServicio;
-import Servicios.importarContratos;
 
 public class main {
     public static void main(String[] args) {
@@ -17,11 +15,7 @@ public class main {
         ClienteServicio servicioCliente = new ClienteServicio();
         ContratoServicio servicioContrato = new ContratoServicio();
         ExportarServicio servicioExportar = new ExportarServicio();
-        ImportarServicio servicioImportar = new ImportarServicio()
-
-        //importaciones 
-        importarContratos importar =new importarContratos();
-        importar.importarContratos();
+        ImportarServicio servicioImportar = new ImportarServicio();
 
         // Mostrar menú general de forma infinita hasta que el usuario desee salir
         while (true) {
@@ -139,14 +133,14 @@ public class main {
                         switch(opcionExportar) {
                             case 1:
                                 // Clientes
+                                servicioExportar.clientes();
                                 break;
                             case 2:
                                 servicioExportar.vehiculos();
                                 break;
                             case 3:
                                 // Contratos
-                                ExportarContratos exportador = new ExportarContratos();
-                                exportador.exportarContratos();
+                                servicioExportar.contratos();
                                 break;
                             case 4:
                                 // Informe general

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ClienteServicio {
-    private static List<Cliente> listaCliente = new ArrayList<>();
+    static List<Cliente> listaCliente = new ArrayList<>();
     private MenuServicio servicioMenu = new MenuServicio();
 
     Scanner sc =  new Scanner(System.in);

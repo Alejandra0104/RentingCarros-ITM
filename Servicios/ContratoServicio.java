@@ -395,7 +395,7 @@ public class ContratoServicio
 
         for (ContratoRenting contrato : contratos) {
 
-            if (contrato.getEstado().equals("ACTIVO")) {
+            if (contrato.getEstado().trim().equalsIgnoreCase("ACTIVO")) {
 
                 imprimir(contrato);
 
@@ -407,7 +407,7 @@ public class ContratoServicio
  
         for (ContratoRenting contrato : contratos) {
 
-            if (contrato.getEstado().equals("FINALIZADO")) {
+            if (contrato.getEstado().trim().equalsIgnoreCase("FINALIZADO")) {
 
                 imprimir(contrato);
 

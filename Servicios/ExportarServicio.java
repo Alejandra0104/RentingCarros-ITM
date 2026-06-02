@@ -4,6 +4,7 @@ import Modelos.CamionetaSUV;
 import Modelos.CarroSedan;
 import Modelos.ContratoRenting;
 import Modelos.Vehiculo;
+import Modelos.Cliente;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -91,5 +92,33 @@ public class ExportarServicio {
         }
 
         return true;
+    }
+
+    public boolean clientes() {
+        List<Cliente> cliente = servicioCliente.getClientes();
+
+        //Exportar CVS
+        StringBuilder csvBuilder = new StringBuilder();
+        csvBuilder.append("Cedula,Nombre,Apellido,Telefono,Direccion,LicenciaConduccion\n");
+
+        for (Cliente clientes : cliente) {
+            csvBuilder.append(clientes.getCedula()).append(",");
+            csvBuilder.append(clientes.getNombre()).append(",");
+            csvBuilder.append(clientes.getApellido()).append(",");
+            csvBuilder.append(clientes.getTelefono()).append(",");
+            csvBuilder.append(clientes.getDireccion()).append(",");
+            csvBuilder.append(clientes.getLicenciaConduccion()).append(",");
+
+         }
+         // Guardar CVS en archivo 
+         try(FileWriter fileWriter = new FileWriter("exports/clientes.cvs")) {
+             fileWriter.write(csvBuilder.toString());
+             System.out.println("Clientes exportados exitosamente a clientes.cvs");
+         } catch (IOException e) {
+            System.out.println("Error al exportar clientes: " + e.getMessage());
+            return false;
+         }
+
+         return true;
     }
 }

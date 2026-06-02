@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class VehiculoServicio {
-    private static List<Vehiculo> listaVehiculos = new ArrayList<>();
+    static List<Vehiculo> listaVehiculos = new ArrayList<>();
 
     public ValidacionServicio validaciones = new ValidacionServicio();
     public ContratoServicio servicioContrato = new ContratoServicio();
