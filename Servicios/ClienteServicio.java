@@ -593,6 +593,13 @@ public class ClienteServicio {
         return listaCliente;
 
     }
+    public static List<Cliente>getListaClientes(){
+        return listaCliente;
+    }
+    public boolean setListaCliente(List<Cliente> ListaClientes){
+        ClienteServicio.listaCliente = listaCliente;
 
+        return true;
+    }
     
 }
