@@ -4,16 +4,22 @@ import Servicios.ExportarContratos;
 import Servicios.ExportarServicio;
 import Servicios.MenuServicio;
 import Servicios.VehiculoServicio;
+import Servicios.importarContratos;
 
 public class main {
     public static void main(String[] args) {
         MenuServicio servicioMenu = new MenuServicio();
+
 
         // Inicializacion de Servicios
         VehiculoServicio servicioVehiculo = new VehiculoServicio();
         ClienteServicio servicioCliente = new ClienteServicio();
         ContratoServicio servicioContrato = new ContratoServicio();
         ExportarServicio servicioExportar = new ExportarServicio();
+
+        //importaciones 
+        importarContratos importar =new importarContratos();
+        importar.importarContratos();
 
         // Mostrar menú general de forma infinita hasta que el usuario desee salir
         while (true) {

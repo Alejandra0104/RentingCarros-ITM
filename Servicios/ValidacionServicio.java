@@ -3,6 +3,7 @@ package Servicios;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
+import java.util.LinkedList;
 
 import Modelos.ContratoRenting;
 
@@ -96,9 +97,22 @@ public class ValidacionServicio {
             return true;
         }
 
-        System.out.println("El id del contrato no es válido. Debe seguir el formato CTR000"); 
+        System.out.println("El id del contrato no es válido o no existe. Debe seguir el formato CTR000, reintente..."); 
         return false;
     }
+
+    public boolean existeContrato(String idContrato, LinkedList<ContratoRenting> contratos) {
+
+        for (ContratoRenting contrato : contratos) {
+
+            if (contrato.getIdContrato().equals(idContrato)) {
+
+                return true;
+            }
+    }
+
+    return false;
+}
     //valido que la fecha de inicio sea posterior a la fecha actual
     public String validarFecha(String mensaje) {
 

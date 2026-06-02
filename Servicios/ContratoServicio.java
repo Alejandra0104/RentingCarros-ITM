@@ -134,6 +134,7 @@ public class ContratoServicio
             
             // se ingresa y se valida el valor total del contrato 
             nuevoContrato.setValorTotal(validacion.validarValorTotal());
+            nuevoContrato.setEstado("ACTIVO");
 
             //Se agrega el objeto a la lista
             contratos.add(nuevoContrato);
@@ -155,16 +156,42 @@ public class ContratoServicio
     public LinkedList<ContratoRenting> modificarContrato() {
 
         MenuServicio menu = new MenuServicio();
-        contratoEncontrado = false;
-
         String idContrato;
 
-        do {
+        while (true) {
 
-            System.out.print("Ingrese el id del contrato que desea modificar: ");
-            idContrato = sc.nextLine().toUpperCase();
+            do {
 
-        } while (!validacion.validarIdcontrato(idContrato));
+                System.out.print("Ingrese el id del contrato que desea modificar: ");
+                idContrato = sc.nextLine().toUpperCase();
+
+            } while (!validacion.validarIdcontrato(idContrato));
+
+            contratoEncontrado = false;
+
+            for (ContratoRenting contrato : contratos) {
+
+                if (contrato.getIdContrato().equals(idContrato)) {
+
+                    contratoEncontrado = true;
+                    break;
+                }
+            }
+
+            if (contratoEncontrado) {
+
+                break;
+            }
+
+            System.out.println("El contrato no existe.");
+
+            int opcion = menu.preguntarContinuar();
+
+            if (opcion == 2) {
+
+                return contratos;
+            }
+        }
 
         for (ContratoRenting contrato : contratos) {
 
@@ -235,12 +262,7 @@ public class ContratoServicio
                         String fin = validacion.validarFechaFin(inicio);
                         contrato.setFechaFin(fin);
 
-                        // Calcular días
-                        LocalDate fechaInicio = LocalDate.parse(inicio);
-                        LocalDate fechaF = LocalDate.parse(fin);
-
-                        long totalDias = ChronoUnit.DAYS.between(fechaInicio, fechaF);
-                        contrato.setTotalDias((int) totalDias);
+                        validacion.recalcularDias(contrato);
 
                         // Validar valor
                         contrato.setValorTotal(validacion.validarValorTotal());
@@ -267,68 +289,102 @@ public class ContratoServicio
 
     public void Consultar() {
 
-        contratoEncontrado = false;
+        MenuServicio menu = new MenuServicio();
+
         String idContrato;
 
-        // Validar formato del ID
-        do {
+        while (true) {
 
-            System.out.print("Por favor Ingrese el id del Contrato a buscar: ");
-            idContrato = sc.nextLine();
+            // Validar formato
+            do {
 
-        } while (!validacion.validarIdcontrato(idContrato));
+                System.out.print("Por favor Ingrese el id del Contrato a buscar: ");
+                idContrato = sc.nextLine().toUpperCase();
 
-        // Buscar contrato
-        for (ContratoRenting nuevoContrato : contratos) {
-            if (nuevoContrato.getIdContrato().equals(idContrato)) {
-                contratoEncontrado = true;
+            } while (!validacion.validarIdcontrato(idContrato));
 
-                System.out.println("Cédula del cliente: " + nuevoContrato.getCedulaCliente());
-                System.out.println("Placa del vehículo: " + nuevoContrato.getPlacaVehiculo());
-                System.out.println("Fecha de inicio: " + nuevoContrato.getFechaInicio());
-                System.out.println("Fecha de fin: " + nuevoContrato.getFechaFin());
-                System.out.println("Total de días: " + nuevoContrato.getTotalDias());
-                System.out.println("Valor total: " + nuevoContrato.getValorTotal());
-                System.out.println("Estado: " + nuevoContrato.getEstado());
+            contratoEncontrado = false;
 
-                System.out.println("------------------------------");
+            // Buscar contrato
+            for (ContratoRenting contrato : contratos) {
+
+                if (contrato.getIdContrato().equals(idContrato)) {
+
+                    contratoEncontrado = true;
+
+                    System.out.println("Cédula del cliente: " + contrato.getCedulaCliente());
+                    System.out.println("Placa del vehículo: " + contrato.getPlacaVehiculo());
+                    System.out.println("Fecha de inicio: " + contrato.getFechaInicio());
+                    System.out.println("Fecha de fin: " + contrato.getFechaFin());
+                    System.out.println("Total de días: " + contrato.getTotalDias());
+                    System.out.println("Valor total: " + contrato.getValorTotal());
+                    System.out.println("Estado: " + contrato.getEstado());
+
+                    System.out.println("------------------------------");
+
+                    return; // termina el método porque ya encontró el contrato
+                }
             }
-        }
-        if (!contratoEncontrado) {
-            System.out.println("Contrato no encontrado...");
+
+            // Si llega aquí es porque no encontró el contrato
+            System.out.println("Contrato no encontrado.");
+
+            int opcion = menu.preguntarContinuar();
+
+            if (opcion == 2) {
+
+                return; // volver al menú anterior
+            }
         }
     }
     
     public LinkedList<ContratoRenting> finalizarContrato() {
 
+        MenuServicio menu = new MenuServicio();
+
         String idContrato;
-        do{
-            System.out.print("Por favor Ingrese el id del Contrato a finalizar: ");
-            idContrato = sc.nextLine().toUpperCase();
-        }while (!validacion.validarIdcontrato(idContrato));
-        
-        contratoEncontrado = false;
 
-        for (ContratoRenting contrato : contratos) {
+        while (true) {
 
-            if (contrato.getIdContrato().equals(idContrato)) {
+            // Validar formato
+            do {
 
-                // Cambia la fecha fin al día actual
-                contrato.setFechaFin(LocalDate.now().toString());
+                System.out.print("Por favor Ingrese el id del Contrato a finalizar: ");
+                idContrato = sc.nextLine().toUpperCase();
 
-                contratoEncontrado = true;
+            } while (!validacion.validarIdcontrato(idContrato));
 
-                System.out.println("Contrato finalizado correctamente...");
-                new ExportarContratos().exportarContratos();
+            contratoEncontrado = false;
+
+            // Buscar contrato
+            for (ContratoRenting contrato : contratos) {
+
+                if (contrato.getIdContrato().equals(idContrato)) {
+
+                    contratoEncontrado = true;
+
+                    // Cambia la fecha fin al día actual
+                    contrato.setFechaFin(LocalDate.now().toString());
+                    contrato.setFechaInicio(LocalDate.now().toString());
+
+                    contrato.setEstado("FINALIZADO");
+                    System.out.println("Contrato finalizado correctamente...");
+                    new ExportarContratos().exportarContratos();
+
+                    return contratos;
+                }
+            }
+
+            // Si no se encontró
+            System.out.println("Contrato no encontrado.");
+
+            int opcion = menu.preguntarContinuar();
+
+            if (opcion == 2) {
+
+                return contratos;
             }
         }
-
-        if (!contratoEncontrado) {
-
-            System.out.println("Contrato no encontrado...");
-        }
-
-        return contratos;
     }
     
     public void imprimirInforme() {
