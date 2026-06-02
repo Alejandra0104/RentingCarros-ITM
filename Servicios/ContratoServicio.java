@@ -23,11 +23,12 @@ public class ContratoServicio
             ContratoRenting nuevoContrato = new ContratoRenting ();
             
              //valido que no exista idcontrato
+             //valido formato del idcontrato
             while (valido) {
                 valido = false;
 
                 System.out.print("Por favor Ingrese el id del contrato: ");
-                nuevoContrato.setIdContrato(sc.nextLine());
+                nuevoContrato.setIdContrato(sc.nextLine().toUpperCase());
 
                 // Validar formato
                 if (!validacion.validarIdcontrato(nuevoContrato.getIdContrato())) {
@@ -49,11 +50,13 @@ public class ContratoServicio
                     }
                 }
             }
+
+            valido = true;
             while (valido) {
                 //valido cédula
                 valido = false;
  
-                System.out.println("Ingrese la cedula del cliente: ");
+                System.out.print("Ingrese la cedula del cliente: ");
                 nuevoContrato.setCedulaCliente(sc.nextLine());
  
                 // Agrego el while para que valide el Regex
@@ -80,9 +83,6 @@ public class ContratoServicio
  
                             return contratos;
                         }
-                        if (opcion.equalsIgnoreCase("Y")) {
-                           
-                        }
  
                         valido = true;
  
@@ -98,7 +98,7 @@ public class ContratoServicio
                 valido = false;
 
                 System.out.print("Ingrese la placa del vehículo: ");
-                nuevoContrato.setPlacaVehiculo(sc.nextLine());
+                nuevoContrato.setPlacaVehiculo(sc.nextLine().toUpperCase());
 
                 if(!validacion.validarPlaca(nuevoContrato.getPlacaVehiculo()))
                 {
@@ -138,8 +138,8 @@ public class ContratoServicio
             //Se agrega el objeto a la lista
             contratos.add(nuevoContrato);
             System.out.println("Contrato registrado...");
+            new ExportarContratos().exportarContratos();
             
-            sc.nextLine();
             System.out.print("Desea seguir registrando contratos Y/N: ");
             opcion = sc.nextLine();
             while (!validacion.ValidarDimension(opcion)) {
@@ -151,58 +151,109 @@ public class ContratoServicio
         }
         return contratos;
     }
-    
+    //metodo ActualizarContrato con switch case para elegir que dato modificar del contrato
     public LinkedList<ContratoRenting> modificarContrato() {
 
+        MenuServicio menu = new MenuServicio();
         contratoEncontrado = false;
 
         String idContrato;
 
-        // Validar formato del ID
         do {
 
             System.out.print("Ingrese el id del contrato que desea modificar: ");
-            idContrato = sc.nextLine();
+            idContrato = sc.nextLine().toUpperCase();
 
         } while (!validacion.validarIdcontrato(idContrato));
 
-        System.out.println("");
+        for (ContratoRenting contrato : contratos) {
 
-        for (ContratoRenting nuevoContrato : contratos) {
-            if (nuevoContrato.getIdContrato().equals(idContrato)) {
+            if (contrato.getIdContrato().equals(idContrato)) {
+
                 contratoEncontrado = true;
-
+                
+                // Muestro la información actual del contrato antes de modificar
                 System.out.println("Información actual del contrato...");
-                System.out.println("Cédula del cliente: " + nuevoContrato.getCedulaCliente());
-                System.out.println("Placa del vehículo: " + nuevoContrato.getPlacaVehiculo());
-                System.out.println("Fecha de inicio: " + nuevoContrato.getFechaInicio());
-                System.out.println("Fecha de fin: " + nuevoContrato.getFechaFin());
-                System.out.println("Total de días: " + nuevoContrato.getTotalDias());
-                System.out.println("Valor total: " + nuevoContrato.getValorTotal());
+                System.out.println("Cédula del cliente: " + contrato.getCedulaCliente());
+                System.out.println("Placa del vehículo: " + contrato.getPlacaVehiculo());
+                System.out.println("Fecha de inicio: " + contrato.getFechaInicio());
+                System.out.println("Fecha de fin: " + contrato.getFechaFin());
+                System.out.println("Total de días: " + contrato.getTotalDias());
+                System.out.println("Valor total: " + contrato.getValorTotal());
 
                 System.out.println("------------------------------");
 
-                System.out.println("A continuación debes ingresar la nueva información...");
+                int opcion = menu.actualizarContrato();
 
-                // Validar fecha inicio
-                String inicio = validacion.validarFecha("Ingrese la fecha de inicio (AAAA-MM-DD): ");
-                nuevoContrato.setFechaInicio(inicio);
+                switch (opcion) {
 
-                // Validar fecha fin
-                String fin = validacion.validarFechaFin(inicio);
-                nuevoContrato.setFechaFin(fin);
+                    case 1:
 
-                // Calcular días
-                LocalDate fechaInicio = LocalDate.parse(inicio);
-                LocalDate fechaFin = LocalDate.parse(fin);
+                        String nuevaFechaInicio = validacion.validarFecha("Ingrese la nueva fecha de inicio (AAAA-MM-DD): ");
 
-                long totalDias = ChronoUnit.DAYS.between(fechaInicio, fechaFin);
-                nuevoContrato.setTotalDias((int) totalDias);
+                        contrato.setFechaInicio(nuevaFechaInicio);
 
-                // Validar valor
-                nuevoContrato.setValorTotal(validacion.validarValorTotal());
+                        // Validar nuevamente la fecha fin
+                        String fechaFin = validacion.validarFechaFin(nuevaFechaInicio);
 
-                System.out.println("Contrato modificado correctamente");
+                        contrato.setFechaFin(fechaFin);
+
+                        validacion.recalcularDias(contrato);
+
+                        System.out.println("Fecha de inicio actualizada.");
+                        new ExportarContratos().exportarContratos();
+
+                        break;
+
+                    case 2:
+
+                        String nuevaFechaFin = validacion.validarFechaFin(contrato.getFechaInicio());
+
+                        contrato.setFechaFin(nuevaFechaFin);
+
+                        validacion.recalcularDias(contrato);
+
+                        System.out.println("Fecha de fin actualizada.");
+                        new ExportarContratos().exportarContratos();
+
+                        break;
+
+                    case 3:
+
+                        contrato.setValorTotal(validacion.validarValorTotal());
+
+                        System.out.println("Valor total actualizado.");
+                        new ExportarContratos().exportarContratos();
+
+                        break;
+                    case 4:
+                        // Validar fecha inicio
+                        String inicio = validacion.validarFecha("Ingrese la fecha de inicio (AAAA-MM-DD): ");
+                        contrato.setFechaInicio(inicio);
+
+                        // Validar fecha fin
+                        String fin = validacion.validarFechaFin(inicio);
+                        contrato.setFechaFin(fin);
+
+                        // Calcular días
+                        LocalDate fechaInicio = LocalDate.parse(inicio);
+                        LocalDate fechaF = LocalDate.parse(fin);
+
+                        long totalDias = ChronoUnit.DAYS.between(fechaInicio, fechaF);
+                        contrato.setTotalDias((int) totalDias);
+
+                        // Validar valor
+                        contrato.setValorTotal(validacion.validarValorTotal());
+                        System.out.println("información actualizada.");
+                        new ExportarContratos().exportarContratos();
+
+                        break;
+
+                    case 5:
+
+                        System.out.println("Modificación cancelada.");
+                        break;
+                }
             }
         }
 
@@ -253,7 +304,7 @@ public class ContratoServicio
         String idContrato;
         do{
             System.out.print("Por favor Ingrese el id del Contrato a finalizar: ");
-            idContrato = sc.nextLine();
+            idContrato = sc.nextLine().toUpperCase();
         }while (!validacion.validarIdcontrato(idContrato));
         
         contratoEncontrado = false;
@@ -268,6 +319,7 @@ public class ContratoServicio
                 contratoEncontrado = true;
 
                 System.out.println("Contrato finalizado correctamente...");
+                new ExportarContratos().exportarContratos();
             }
         }
 
@@ -311,7 +363,6 @@ public class ContratoServicio
         System.out.println("Total generado por renting: $" + totalIngresos);
     }
     
-    // Este metodo lo podemos sobrecargar con las otras entidades 
     public void imprimir(ContratoRenting nuevoContrato) {
         System.out.println("-------------------------- --");
         System.out.println("Id del nuevoContrato: " + nuevoContrato.getIdContrato());
@@ -326,7 +377,7 @@ public class ContratoServicio
     }
 
     // Conseguir y editar lista de contratos (para exportar)
-    public LinkedList<ContratoRenting> getContratos() {
+    public static LinkedList<ContratoRenting> getContratos() {
         return contratos;
     }
 

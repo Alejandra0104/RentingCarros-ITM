@@ -1,0 +1,3 @@
+ID Contrato, Cedula Cliente, Placa Vehiculo, Fecha Inicio, Fecha Fin, Total Dias, Valor Total
+CTR000, 123456, AAA-258, 2026-06-20, 2026-06-25, 5, 50000.0,ACTIVO
+CTR123, 321654, SSS-555, 2026-06-02, 2026-06-02, 0, 1000.0,ACTIVO

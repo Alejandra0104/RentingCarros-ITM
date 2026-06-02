@@ -1,5 +1,6 @@
 import Servicios.ClienteServicio;
 import Servicios.ContratoServicio;
+import Servicios.ExportarContratos;
 import Servicios.ExportarServicio;
 import Servicios.MenuServicio;
 import Servicios.VehiculoServicio;
@@ -136,6 +137,8 @@ public class main {
                                 break;
                             case 3:
                                 // Contratos
+                                ExportarContratos exportador = new ExportarContratos();
+                                exportador.exportarContratos();
                                 break;
                             case 4:
                                 // Informe general

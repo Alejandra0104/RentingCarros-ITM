@@ -196,10 +196,10 @@ public class MenuServicio {
         while (true) {
             try {
                 System.out.println("------ACTUALIZAR CONTRATO------");
-                System.out.println("1. Cedula de Cliente");
-                System.out.println("2. Placa de Vehiculo");
-                System.out.println("3. Fecha de Inicio");
-                System.out.println("4. Fecha de Fin");
+                System.out.println("1. Fecha de Inicio");
+                System.out.println("2. Fecha de Fin");
+                System.out.println("3. Valor Total");
+                System.out.println("4. Actualizar todos los datos del contrato");
                 System.out.println("5. Cancelar");
 
                 System.out.print("Ingrese la opción que desea actualizar: ");
