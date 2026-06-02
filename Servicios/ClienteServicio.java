@@ -60,6 +60,19 @@ public class ClienteServicio {
                         valido = true;
 
                     }
+                    // Validar que la cedula no sea igual al telefono de otro cliente 
+                    if (cliente.getTelefono().equalsIgnoreCase(nuevoCliente.getCedula())) {
+
+                        System.out.println("La cedula no puede ser igual al telefono de otro cliente ");
+                        valido = true;
+                    }   
+                    // Validar que la cedula no sea igual a lalicencia de otro cliente 
+                    if (cliente.getLicenciaConduccion().equalsIgnoreCase(nuevoCliente.getCedula())) {
+
+                        System.out.println("La cedula no puede ser igual a la licencia de otro cliente ");
+                        valido = true;
+                        
+                    }
                     
                 }
             }
@@ -80,7 +93,7 @@ public class ClienteServicio {
                     nuevoCliente.setApellido(sc.nextLine());
                 }
 
-            //valido que otro clinte no tenga el mismo numero de telefono telefono 
+            //valido que otro clinte no tenga el mismo numero de telefono 
             valido = true ;
             while (valido) {
 
@@ -110,6 +123,18 @@ public class ClienteServicio {
 
                         valido = true;
                     }
+                    // Valido que el telefono no sea igual a la cedula de otro cliente 
+                    if (cliente.getCedula().equalsIgnoreCase(nuevoCliente.getTelefono())) {
+                        
+                        System.out.println("El telefono no puede ser igual a la cedula de otro cliente");
+                        valido = true;
+                    }
+                    // Valido que el telefono no sea igual a la licencia de otro cliente 
+                    if (cliente.getLicenciaConduccion().equalsIgnoreCase(nuevoCliente.getTelefono())) {
+                        
+                        System.out.println("El telefono no puede ser igual ala licencia de otro cliente");
+                        valido = true;
+                    }
                 }
             
             }
@@ -118,7 +143,7 @@ public class ClienteServicio {
             nuevoCliente.setDireccion(sc.nextLine());
 
             while (!validacion.ValidarDireccion(nuevoCliente.getDireccion())) { 
-                System.out.println("Ingrese nuevamente la direccion ");
+                System.out.println("La direccion debe ser de 10 o mas caracteres ingrese nuevamente la direccion ");
                 nuevoCliente.setDireccion(sc.nextLine());
 
                 
@@ -147,7 +172,7 @@ public class ClienteServicio {
                 }
 
                 for (Cliente cliente : listaCliente) {
-
+                    // Valida que no sea igual a la licencia de otro cliente
                     if (cliente.getLicenciaConduccion().equalsIgnoreCase(nuevoCliente.getLicenciaConduccion())) {
 
                         System.out.println("Otro cliente ya ingreso esta licencia de conduccion ");
@@ -158,6 +183,11 @@ public class ClienteServicio {
                     if (cliente.getCedula().equalsIgnoreCase(nuevoCliente.getLicenciaConduccion())) {
                         System.out.println("La licencia no puede ser igual a la cedula de otro cliente");
 
+                        valido = true;
+                    }
+                    // Vaalidar que la licencia no sea igual al telefono de otro cliente 
+                    if (cliente.getTelefono().equalsIgnoreCase(nuevoCliente.getLicenciaConduccion())) {
+                        System.out.println("La licencia no puede ser igual al telefono de otro cliente");
                         valido = true;
                     }
                 }
@@ -200,196 +230,294 @@ public class ClienteServicio {
 
         //Recorrer la listaClientes 
         for (Cliente c : listaCliente) {
-        //Validar si la cedula ya existe             
-        if (c.getCedula().equalsIgnoreCase(cedula) ) {
-            /*Se cambia a true para que demuestre que si existe el cliente */
-            ClienteEncontrado = true;
 
-            // Guardar los datos originales 
-            String cedulaOriginal = c.getCedula();
-            String telefonoOriginal = c.getTelefono();
-            String licenciaOriginal = c.getLicenciaConduccion();
+            if (c.getCedula().equalsIgnoreCase(cedula)) {
 
-            // Solicitar nuevos datos
-            System.out.println("Informacion actual del Cliente...");
-            System.out.println("Cedula del cliente: " + c.getCedula());
-            System.out.println("Nombre del cliente: " + c.getNombre() );
-            System.out.println("Apellido del cliente: " + c.getApellido());
-            System.out.println("Telefono del cliente: " + c.getTelefono());
-            System.out.println("Direccion del cliente: " + c.getDireccion());
-            System.out.println("Licencia de conduccion del cliente: " + c.getLicenciaConduccion());
-            System.out.println("******************************");
+               ClienteEncontrado = true;
 
-            System.out.println("A continuacion se debe ingresar la nueva informacion... ");
+                String cedulaOriginal = c.getCedula();
+                String telefonoOriginal = c.getTelefono();
+                String licenciaOriginal = c.getLicenciaConduccion();
 
-            //Se deben ingresear los nuevos datos del cliente 
+                System.out.println("Informacion actual del Cliente...");
+                System.out.println("Cedula del cliente: " + c.getCedula());
+                System.out.println("Nombre del cliente: " + c.getNombre());
+                System.out.println("Apellido del cliente: " + c.getApellido());
+                System.out.println("Telefono del cliente: " + c.getTelefono());
+                System.out.println("Direccion del cliente: " + c.getDireccion());
+                System.out.println("Licencia de conduccion del cliente: " + c.getLicenciaConduccion());
+                System.out.println("******************************");
 
-            boolean valido = true;
+                System.out.println("\n¿Que desea modificar?");
+                System.out.println("1. Cedula");
+                System.out.println("2. Nombre");
+                System.out.println("3. Apellido");
+                System.out.println("4. Telefono");
+                System.out.println("5. Direccion");
+                System.out.println("6. Licencia de conduccion");
+                System.out.println("7. Todo");
 
-            while (valido) { 
-                valido = false;
+                int opcion = Integer.parseInt(sc.nextLine());
 
-                System.out.println("Ingrese la cedula del cliente ");
-                String nuevaCedula = sc.nextLine();
-                // Validar la cedula 
-                while (!validacion.ValidarNumeros(nuevaCedula)) { 
+                switch (opcion) {
 
-                    System.out.println("Ingrese nuevamente la cedula: ");
-                    nuevaCedula = sc.nextLine();
-                    
-                }
+                    case 1 -> c.setCedula(modificarCedula(c, cedulaOriginal));
 
-                
-                for (Cliente cli : listaCliente) {
+                    case 2 -> c.setNombre(modificarNombre());
 
-                    if (!cli.getCedula().equalsIgnoreCase(cedulaOriginal) 
-                        && cli.getCedula().equalsIgnoreCase(nuevaCedula)) {
-                        
-                        System.out.println("Otro cliente ya ingreso este numero de cedula: ");
-                        
-                        valido = true;
+                    case 3 -> c.setApellido(modificarApellido());
+
+                    case 4 -> c.setTelefono(modificarTelefono(c, telefonoOriginal));
+
+                    case 5 -> c.setDireccion(modificarDireccion());
+
+                    case 6 -> c.setLicenciaConduccion(modificarLicencia(c, licenciaOriginal));
+
+                    case 7 -> {
+                        c.setCedula(modificarCedula(c, cedulaOriginal));
+                        c.setNombre(modificarNombre());
+                        c.setApellido(modificarApellido());
+                        c.setTelefono(modificarTelefono(c, telefonoOriginal));
+                        c.setDireccion(modificarDireccion());
+                        c.setLicenciaConduccion(modificarLicencia(c, licenciaOriginal));
                     }
+
+                    default -> System.out.println("Opcion invalida");
+                }
+
+                System.out.println("\nInformacion del cliente modificada correctamente");
+                System.out.println("");
+
+                break;
+            }
+        }
+
+            if (!ClienteEncontrado) {
+
+                System.out.println("El cliente no fue encontrado");
+            }
+
+            return listaCliente;
+    }
+    // Modificar cedula
+    public String modificarCedula(Cliente c, String cedulaOriginal){
+
+        boolean valido = true;
+        String nuevaCedula = "";
+
+        while (valido) {
+
+            valido = false;
+
+            System.out.println("Ingrese la cedula del cliente ");
+            nuevaCedula = sc.nextLine();
+
+            while (!validacion.ValidarNumeros(nuevaCedula)) {
+
+                System.out.println("La cedula debe contener solo numeros");
+                System.out.println("Ingrese nuevamente la cedula: ");
+                nuevaCedula = sc.nextLine();
+            }
+            // Cedula no puede ser igual al telefono del mismo cliente 
+            while (nuevaCedula.equalsIgnoreCase(c.getTelefono())) {
+                
+                System.out.println("La cedula no puede ser igual al telefono del mismo cliente");
+
+                System.out.println("Ingrese nuevamente la cedula: ");
+                nuevaCedula = sc.nextLine();
+            }
+
+            for (Cliente cli : listaCliente) {
+                // Validar que la cedula no este repetida 
+                if (!cli.getCedula().equalsIgnoreCase(cedulaOriginal)
+                        && cli.getCedula().equalsIgnoreCase(nuevaCedula)) {
+
+                    System.out.println("Otro cliente ya ingreso este numero de cedula");
+                    valido = true;
+                }
+                // Que cedula no sea igual al telefono de otro cliente
+                if (!cli.getTelefono().equalsIgnoreCase(c.getCedula())
+                    && cli.getTelefono().equalsIgnoreCase(nuevaCedula)) {
+
+                    System.out.println("La cedula no puede ser igual al telfono de otro cliente");
+                       
+                    valido = true;
+                }   
+                // Validar que no sea Igual a la licencia de otro cliente
+                if (!cli.getLicenciaConduccion().equalsIgnoreCase(c.getLicenciaConduccion())
+                    && cli.getLicenciaConduccion().equalsIgnoreCase(nuevaCedula)) {
                     
+                    System.out.println("La cedula no puede ser igual a la licencia de otro cliente");
+                    valido = true;    
                 }
-                if (!valido) {
-                    
-                    c.setCedula(nuevaCedula);
-                }
-                
             }
+        }
 
-            // Validar el nombre 
-            System.out.println("Ingrese el Nombre del cliente ");
-            c.setNombre(sc.nextLine());
+        return nuevaCedula;
+    }
 
-            while (!validacion.validarTexto(c.getNombre())) {
-                
-                System.out.println("Ingrese nuevamente el nombre: ");
-                c.setNombre(sc.nextLine());
-                
-                
-            }
-            // Validar el apellido
-            System.out.println("Ingrese el Apellido del cliente ");
-            c.setApellido(sc.nextLine());
+    // Modificar nombre
+    public String modificarNombre(){
 
-            while (!validacion.validarTexto(c.getApellido())) {
-                
-                System.out.println("Ingrese nuevamente el apellido: ");
-                c.setApellido(sc.nextLine());
-            }
-            // Validar el telefono
-            valido = true;
+        System.out.println("Ingrese el nombre del cliente ");
+        String nombre = sc.nextLine();
 
-            while (valido) { 
+        while (!validacion.validarTexto(nombre)) {
 
-                    valido = false;
+            System.out.println("El nombre solo puede contener letras");
+            System.out.println("Ingrese nuevamente el nombre ");
+            nombre = sc.nextLine();
+            
+        }
+        return nombre;
+    }
+    // Modificar Apellido
+    public String modificarApellido(){
 
-                System.out.println("Ingrese el Telefono del cliente ");
-                String nuevoTelefono = sc.nextLine();
+        System.out.println("Ingrese el apellido del cliente ");
+        String apellido = sc.nextLine();
 
-                while (!validacion.ValidarNumeros(nuevoTelefono)) {
-                
-                    System.out.println("Ingrese nuevamente el telefono");
-                    nuevoTelefono = sc.nextLine();
-                
-                }
-                    while (nuevoTelefono.equalsIgnoreCase(c.getCedula())) { 
+        while (!validacion.validarTexto(apellido)) {
 
-                System.out.println("El telefono no puede ser igual a la cedula ");
+            System.out.println("El apellido solo puede contener letras ");
+            System.out.println("Ingrese nuevamente el apellido: ");
+            apellido = sc.nextLine(); 
+            
+        }
+        return apellido;
+    }
+    // Modificar telefono
+    public String modificarTelefono(Cliente c, String telefonoOriginal){
 
+         boolean valido = true;
+         String nuevoTelefono = "";
+
+        while (valido) {
+
+            valido = false;
+
+            System.out.println("Ingrese el Telefono del cliente ");
+            nuevoTelefono = sc.nextLine();
+
+            while (!validacion.ValidarNumeros(nuevoTelefono)) {
+
+                System.out.println("El telefono solo puede contener de 6 a 10 numeros");
                 System.out.println("Ingrese nuevamente el telefono: ");
                 nuevoTelefono = sc.nextLine();
+            }
 
-                }
-                for (Cliente cli : listaCliente) {
+            
+
+            while (nuevoTelefono.equalsIgnoreCase(c.getCedula())) {
+
+                System.out.println("El telefono no puede ser igual a la cedula");
+
+                System.out.println("Ingrese nuevamente el telefono:");
+                nuevoTelefono = sc.nextLine();
+            }
+
+            for (Cliente cli : listaCliente) {
 
                 if (!cli.getTelefono().equalsIgnoreCase(telefonoOriginal)
                         && cli.getTelefono().equalsIgnoreCase(nuevoTelefono)) {
 
                     System.out.println("Otro cliente ya tiene este telefono");
+                    valido = true;
+                }
+                // validar que no sea igual a la cedula de otro cliente 
+                if (!cli.getCedula().equalsIgnoreCase(c.getCedula())
+                     && cli.getCedula().equalsIgnoreCase(nuevoTelefono)) {
 
+                    System.out.println("El telefono no puede ser igual a la cedula de otro cliente ");    
+                    valido = true;
+                }
+                // validar que no sea igual a la licencia de otro cliente
+                if (!cli.getLicenciaConduccion().equalsIgnoreCase(c.getLicenciaConduccion())
+                    && cli.getLicenciaConduccion().equalsIgnoreCase(nuevoTelefono)) {
+                    
+                    System.out.println("El telefono no puede ser igual a la licencia de otro cliente ");    
                     valido = true;
                 }
             }
-                if (!valido) {
-                    c.setTelefono(nuevoTelefono);
-                    
-                } 
+        }
+
+        return nuevoTelefono;
+
+    }
+
+    // Modificar Direccion 
+    public String modificarDireccion(){
+
+
+        System.out.println("Ingrese la direccion del cliente ");
+        String direccion = sc.nextLine();
+
+        while (!validacion.ValidarDireccion(direccion)|| direccion.matches("\\d+")) {
+            
+            System.out.println("Direccin invalida deben ser mas de 3 caracteres y menos de 100");
+            System.out.println("Ingrese nuevamente la direccion: ");
+            direccion = sc.nextLine();
+            
+        }
+        return direccion;
+    }
+    // Modificar licencia de conduccion
+    public String modificarLicencia(Cliente c, String licenciaOriginal){
+
+         boolean valido = true;
+        String nuevaLicencia = "";
+
+        while (valido) {
+
+            valido = false;
+
+            System.out.println("Ingrese la Licencia de conduccion del cliente ");
+            nuevaLicencia = sc.nextLine();
+
+            while (!validacion.ValidarNumeros(nuevaLicencia)) {
+
+                System.out.println("La licencia solo puede contener numeros");
+                System.out.println("Ingrese nuevamente la licencia:");
+                nuevaLicencia = sc.nextLine();
             }
-            // Validar la direccion                
-            System.out.println("Ingrese la Direccion del cliente ");
-            c.setDireccion(sc.nextLine());
 
-            while (!validacion.ValidarDireccion(c.getDireccion())) { 
+            while (nuevaLicencia.equalsIgnoreCase(c.getTelefono())) {
 
-                System.out.println("Ingrese nuevamente la direccion: ");
-                c.setDireccion(sc.nextLine());
-                
+                System.out.println("La licencia no puede ser igual al telefono");
+
+                System.out.println("Ingrese nuevamente la licencia: ");
+                nuevaLicencia = sc.nextLine();
             }
-            // Validar la licencia de conduccion
-            valido = true;
 
-            while (valido) {
-                valido = false; 
-                
-                    System.out.println("Ingrese la Licencia de conduccion del cliente ");
-                    String nuevaLicencia = sc.nextLine();
+            for (Cliente cli : listaCliente) {
 
-                // valido el regex
-                while (!validacion.ValidarNumeros(nuevaLicencia)) {
-                    
-                    System.out.println("Ingrese nuevamente la licencia: ");
-                    nuevaLicencia = sc.nextLine();
-                    
-                }
-                // Validar que la licencia no sea igual al telefono
-                while (nuevaLicencia.equalsIgnoreCase(c.getTelefono())) {
-                    
-                    System.out.println("La licencia de conduccion no puede ser igual al telefono");
-
-                    System.out.println("Ingrese nuevamente la liecencia de conduccion: ");
-                    nuevaLicencia = sc.nextLine();
-                    
-                }
-                for (Cliente cli : listaCliente) {
-                    // Valido que la licencia no este repetida
-                    if (!cli.getLicenciaConduccion().equalsIgnoreCase(c.getLicenciaConduccion()) 
+                // Validar que no este repetida
+                if (!cli.getLicenciaConduccion().equalsIgnoreCase(licenciaOriginal)
                         && cli.getLicenciaConduccion().equalsIgnoreCase(nuevaLicencia)) {
-                        
-                        System.out.println("Otro cliente ya tiene esta licencia de conduccion");    
-                        valido = true;
-                    }
 
-                    // Validar que la licencia no sea igual a la cedula de otro cliente
-                    if (!cli.getCedula().equalsIgnoreCase(c.getCedula()) 
+                    System.out.println("Otro cliente ya tiene esta licencia");
+                    valido = true;
+                }
+                // Validar que no sea igual a la cedula de otro cliente 
+                if (!cli.getCedula().equalsIgnoreCase(c.getCedula())
                         && cli.getCedula().equalsIgnoreCase(nuevaLicencia)) {
 
-                        System.out.println("La licencia no puede ser igual a la cedula de otro cliente");    
-                        
-                        valido = true;
-                        
-                    }
-                    
+                    System.out.println("La licencia no puede ser igual a la cedula de otro cliente");
+                    valido = true;
                 }
-                if (!valido) {
-                    c.setLicenciaConduccion(nuevaLicencia);
+                // Validar que no sea igual al telefono de otro cliente
+                if (!cli.getTelefono().equalsIgnoreCase(c.getTelefono())
+                    && cli.getTelefono().equalsIgnoreCase(nuevaLicencia)) {
                     
+                    System.out.println("La licencia no puede ser igual al telefono de otro cliente");    
+                    valido = true;
                 }
-
+                
             }
+        }
 
-                System.out.println("\nInformacion del cliente modificada correctamente ");
-                System.out.println("");
-            } 
-        }
-        /*Si el cliente no fue encontrado la bandera o boolean queda en False */
-        if (!ClienteEncontrado) {
-            
-            System.out.println("El cliente no fue encontrado ");
-            
-        }
-        return listaCliente;
+        return nuevaLicencia;
+
     }
 
     //Eliminar
@@ -451,7 +579,7 @@ public class ClienteServicio {
     }
     public List<Cliente> VerClientes (){
 
-        System.out.println("Ver todos los Clientes que estan Registrados ");
+        System.out.println("***************** Ver todos los Clientes que estan Registrados ***************** ");
         // Estoy llenando la listaClientes para Ver que todos los clientes si esten registrados 
         for (Cliente cliente : listaCliente) {
             System.out.println("Cedula: " + cliente.getCedula());

@@ -123,7 +123,7 @@ public class MenuServicio {
                 System.out.println("5. Salir");
 
                 System.out.print("Ingrese la opcion que desea realizar: ");
-                int opcion = Integer.parseInt(teclado);
+                int opcion = Integer.parseInt(teclado.nextLine());
 
                 // Validar opcion
                 if(opcion > 0 && opcion < 6) {
