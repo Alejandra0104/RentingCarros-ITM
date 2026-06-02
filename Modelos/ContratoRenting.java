@@ -1,7 +1,5 @@
 package Modelos;
 
-import java.time.LocalDate;
-
 public class ContratoRenting {
 
     private String IdContrato;
@@ -85,15 +83,10 @@ public class ContratoRenting {
     }
 
     public String getEstado() {
-
-        LocalDate fechaFinContrato = LocalDate.parse(FechaFin);
-
-        if (LocalDate.now().isAfter(fechaFinContrato)) {
-
-            return "FINALIZADO";
-        }
-
-        return "ACTIVO";
+        return Estado;
+    }
+    public void setEstado(String estado) {
+        Estado = estado;
     }
 
     @Override
@@ -106,4 +99,6 @@ public class ContratoRenting {
               + ", TotalDias: " + TotalDias
               + ", ValorTotal: " + ValorTotal + "]";
     }
+
+  
 }

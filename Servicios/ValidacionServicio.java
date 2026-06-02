@@ -1,7 +1,11 @@
 package Servicios;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
+import java.util.LinkedList;
+
+import Modelos.ContratoRenting;
 
 public class ValidacionServicio {
     private Scanner teclado = new Scanner(System.in);
@@ -93,21 +97,41 @@ public class ValidacionServicio {
             return true;
         }
 
-        System.out.println("el id del contrato no es valido. debe seguir el formato CRT000");
+        System.out.println("El id del contrato no es válido o no existe. Debe seguir el formato CTR000, reintente..."); 
         return false;
     }
-    
+
+    public boolean existeContrato(String idContrato, LinkedList<ContratoRenting> contratos) {
+
+        for (ContratoRenting contrato : contratos) {
+
+            if (contrato.getIdContrato().equals(idContrato)) {
+
+                return true;
+            }
+    }
+
+    return false;
+}
+    //valido que la fecha de inicio sea posterior a la fecha actual
     public String validarFecha(String mensaje) {
 
         try {
 
-            System.out.print(mensaje);
-            String fecha = teclado.nextLine();
+            System.out.print( mensaje);
+            String fechaInicio = teclado.nextLine();
 
-            // Intenta convertir la fecha
-            LocalDate.parse(fecha);
+            LocalDate fechaActual = LocalDate.now();
+            LocalDate inicio = LocalDate.parse(fechaInicio);
 
-            return fecha;
+            if (inicio.isBefore(fechaActual)) {
+
+                System.out.println("La fecha de inicio no puede ser menor que la fecha actual");
+
+                return validarFecha(mensaje);
+            }
+
+            return fechaInicio;
 
         } catch (Exception e) {
 
@@ -117,6 +141,7 @@ public class ValidacionServicio {
         }
     }
     
+    // Valida que la fecha de fin sea posterior a la fecha de inicio
     public String validarFechaFin(String fechaInicio) {
 
         try {
@@ -144,6 +169,17 @@ public class ValidacionServicio {
         }
     }
 
+    public void recalcularDias(ContratoRenting contrato) {
+
+        LocalDate fechaInicio = LocalDate.parse(contrato.getFechaInicio());
+
+        LocalDate fechaFin = LocalDate.parse(contrato.getFechaFin());
+
+        long totalDias =
+                ChronoUnit.DAYS.between(fechaInicio, fechaFin);
+
+        contrato.setTotalDias((int) totalDias);
+    }
     public float validarValorTotal() {
 
         try {
