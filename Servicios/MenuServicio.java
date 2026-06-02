@@ -16,13 +16,14 @@ public class MenuServicio {
                 System.out.println("2. Seccion de Vehiculos");
                 System.out.println("3. Seccion de Contratos");
                 System.out.println("4. Exportar informacion");
-                System.out.println("5. Salir");
+                System.out.println("5. Importar informacion");
+                System.out.println("6. Salir");
 
                 System.out.print("Ingrese la opcion que desea realizar: ");
                 int opcion = Integer.parseInt(teclado.nextLine());
 
                 // Validar opcion
-                if (opcion > 0 && opcion < 6) {
+                if (opcion > 0 && opcion < 7) {
                     return opcion;
                 }
 
@@ -127,6 +128,30 @@ public class MenuServicio {
 
                 // Validar opcion
                 if(opcion > 0 && opcion < 6) {
+                    return opcion;
+                }
+
+                System.out.println("Ingrese una opción válida");
+            } catch (NumberFormatException e) {
+                System.out.println("Escriba por favor un numero");
+            }
+        }
+    }
+
+    public int importar() {
+        while(true) {
+            try {
+                System.out.println("---- Menu de importar ----");
+                System.out.println("1. Importar clientes ");
+                System.out.println("2. Importar vehiculos ");
+                System.out.println("3. Importar contratos ");
+                System.out.println("4. Devolver al menu principal");
+
+                System.out.print("Ingrese la opcion que desea realizar: ");
+                int opcion = Integer.parseInt(teclado.nextLine());
+
+                // Validar opcion
+                if(opcion > 0 && opcion < 5) {
                     return opcion;
                 }
 

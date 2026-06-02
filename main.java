@@ -1,6 +1,7 @@
 import Servicios.ClienteServicio;
 import Servicios.ContratoServicio;
 import Servicios.ExportarServicio;
+import Servicios.ImportarServicio;
 import Servicios.MenuServicio;
 import Servicios.VehiculoServicio;
 
@@ -13,6 +14,7 @@ public class main {
         ClienteServicio servicioCliente = new ClienteServicio();
         ContratoServicio servicioContrato = new ContratoServicio();
         ExportarServicio servicioExportar = new ExportarServicio();
+        ImportarServicio servicioImportar = new ImportarServicio()
 
         // Mostrar menú general de forma infinita hasta que el usuario desee salir
         while (true) {
@@ -151,7 +153,35 @@ public class main {
                     continuar = true; // Reseteando variable
 
                     break;
-                case 5: // Salir del sistema
+                case 5: // Importar datos
+                while(continuar) {
+                        int opcionImportar = servicioMenu.importar();
+
+                        switch(opcionImportar) {
+                            case 1:
+                                // Clientes
+                                servicioImportar.clientes();
+                                break;
+                            case 2:
+                                servicioImportar.vehiculos();
+                                break;
+                            case 3:
+                                servicioImportar.contratos();
+                                // Contratos
+                                break;
+                            case 4:
+                                System.out.println("Devolviendo...");
+                                continuar = false;
+                                
+                                break;
+                        }
+                    }
+
+                    continuar = true; // Reseteando variable
+
+                    break;
+
+                case 6: // Salir del sistema
                     System.out.println("Saliendo...");
 
                     System.exit(0);

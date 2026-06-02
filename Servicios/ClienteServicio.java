@@ -1,6 +1,8 @@
 package Servicios;
 
 import Modelos.Cliente;
+import Modelos.Vehiculo;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -466,5 +468,14 @@ public class ClienteServicio {
 
     }
 
-    
+    // Conseguir y editar lista de clientes (para exportar)
+    public List<Cliente> getClientes() {
+        return listaCliente;
+    }
+
+    public boolean setClientes(List<Cliente> clientes) {
+        ClienteServicio.listaCliente = clientes;
+
+        return true;
+    }
 }

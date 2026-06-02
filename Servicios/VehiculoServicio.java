@@ -604,7 +604,7 @@ public class VehiculoServicio {
         return listaVehiculos;
     }
 
-    public boolean setContratos(List<Vehiculo> vehiculos) {
+    public boolean setVehiculos(List<Vehiculo> vehiculos) {
         VehiculoServicio.listaVehiculos = vehiculos;
 
         return true;
