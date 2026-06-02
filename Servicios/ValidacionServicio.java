@@ -65,7 +65,7 @@ public class ValidacionServicio {
     }
 
     public boolean ValidarDireccion(String direccion){
-        String direccionRegex = "^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ#\\-., ]{10,100}$";
+        String direccionRegex = "^(?=.*[a-zA-ZáéíóúÁÉÍÓÚñÑ])[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ#\\-., ]{10,100}$" ;
 
         if (direccion.matches(direccionRegex)) {
 
