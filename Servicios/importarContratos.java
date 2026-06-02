@@ -22,32 +22,29 @@ public class importarContratos {
 
                 ContratoRenting contrato = new ContratoRenting();
 
-                contrato.setIdContrato(
-                    linea.replace("ID Contrato:", "").trim());
+                contrato.setIdContrato( linea.replace("ID Contrato:", "").trim());
 
-                contrato.setCedulaCliente(
-                    br.readLine().replace("Cedula Cliente:", "").trim());
+                contrato.setCedulaCliente(br.readLine().replace("Cedula Cliente:", "").trim());
 
-                contrato.setPlacaVehiculo(
-                    br.readLine().replace("Placa Vehiculo:", "").trim());
+                contrato.setPlacaVehiculo( br.readLine().replace("Placa Vehiculo:", "").trim());
 
-                contrato.setFechaInicio(
-                    br.readLine().replace("Fecha Inicio:", "").trim());
+                contrato.setFechaInicio(br.readLine().replace("Fecha Inicio:", "").trim());
 
-                contrato.setFechaFin(
-                    br.readLine().replace("Fecha Fin:", "").trim());
+                contrato.setFechaFin(br.readLine().replace("Fecha Fin:", "").trim());
 
-                contrato.setTotalDias(
-                    Integer.parseInt(
-                        br.readLine().replace("Total Dias:", "").trim()));
+                contrato.setTotalDias(Integer.parseInt( br.readLine().replace("Total Dias:", "").trim()));
 
-                contrato.setValorTotal(
-                    Float.parseFloat(
-                        br.readLine().replace("Valor Total:", "").trim()));
+                contrato.setValorTotal(Float.parseFloat( br.readLine().replace("Valor Total:", "").trim()));
 
-                contrato.setEstado(
-                    br.readLine().replace("Estado:", "").trim());
+                contrato.setEstado(br.readLine().replace("Estado:", "").trim());
 
+                //
+                System.out.println(
+                    "Importado: "
+                    + contrato.getIdContrato()
+                    + " Estado="
+                    + contrato.getEstado());
+                    //
                 br.readLine(); // línea de guiones
 
                 ContratoServicio.getContratos().add(contrato);
@@ -56,10 +53,10 @@ public class importarContratos {
 
             System.out.println("Contratos cargados correctamente.");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
+            e.printStackTrace();
 
-            System.out.println(
-                "No existe archivo de contratos. Se iniciará una lista vacía.");
+            System.out.println("No existe archivo de contratos. Se iniciará una lista vacía.");
         }
     }
 }

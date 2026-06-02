@@ -1,7 +1,3 @@
 IdContrato,CedulaCliente,PlacaVehiculo,FechaInicio,FechaFin,TotalDias,ValorTotal,Estado
-ID Contrato: CTR123, Cedula Cliente: 123456, Placa Vehiculo: AAA-000, Fecha Inicio: 2026-06-01, Fecha Fin: 2026-06-01, Total Dias: 6, Valor Total: 30000.0, Estado: FINALIZADO
---------------------------------------------------
-ID Contrato: CTR456, Cedula Cliente: 456789, Placa Vehiculo: CBY-654, Fecha Inicio: 2026-07-25, Fecha Fin: 2026-07-30, Total Dias: 5, Valor Total: 50000.0, Estado: ACTIVO
---------------------------------------------------
-ID Contrato: CTR789, Cedula Cliente: 789456, Placa Vehiculo: FTY-741, Fecha Inicio: 2026-06-13, Fecha Fin: 2026-06-27, Total Dias: 14, Valor Total: 60000.0, Estado: ACTIVO
+ID Contrato: CTR123, Cedula Cliente: 123456, Placa Vehiculo: AAA-456, Fecha Inicio: 2026-06-02, Fecha Fin: 2026-06-02, Total Dias: 9, Valor Total: 30000.0, Estado: FINALIZADO
 --------------------------------------------------

@@ -390,12 +390,17 @@ public class ContratoServicio
     public void imprimirInforme() {
 
         float totalIngresos = 0;
+        //
+        for (ContratoRenting contrato : contratos) {
 
+            System.out.println(contrato.getIdContrato() + " -> [" + contrato.getEstado() + "]");
+        }
+        //
         System.out.println("\n---- CONTRATOS ACTIVOS ----");
 
         for (ContratoRenting contrato : contratos) {
 
-            if (contrato.getEstado().equals("ACTIVO")) {
+            if (contrato.getEstado().trim().equalsIgnoreCase("ACTIVO")) {
 
                 imprimir(contrato);
 
@@ -407,7 +412,7 @@ public class ContratoServicio
  
         for (ContratoRenting contrato : contratos) {
 
-            if (contrato.getEstado().equals("FINALIZADO")) {
+            if (contrato.getEstado().trim().equalsIgnoreCase("FINALIZADO")) {
 
                 imprimir(contrato);
 
