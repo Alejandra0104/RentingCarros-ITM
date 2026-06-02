@@ -139,7 +139,7 @@ public class ContratoServicio
             //Se agrega el objeto a la lista
             contratos.add(nuevoContrato);
             System.out.println("Contrato registrado...");
-            new ExportarContratos().exportarContratos();
+            new ExportarServicio().contratos();
             
             System.out.print("Desea seguir registrando contratos Y/N: ");
             opcion = sc.nextLine();
@@ -228,7 +228,7 @@ public class ContratoServicio
                         validacion.recalcularDias(contrato);
 
                         System.out.println("Fecha de inicio actualizada.");
-                        new ExportarContratos().exportarContratos();
+                        new ExportarServicio().contratos();
 
                         break;
 
@@ -241,7 +241,7 @@ public class ContratoServicio
                         validacion.recalcularDias(contrato);
 
                         System.out.println("Fecha de fin actualizada.");
-                        new ExportarContratos().exportarContratos();
+                        new ExportarServicio().contratos();
 
                         break;
 
@@ -250,7 +250,7 @@ public class ContratoServicio
                         contrato.setValorTotal(validacion.validarValorTotal());
 
                         System.out.println("Valor total actualizado.");
-                        new ExportarContratos().exportarContratos();
+                        new ExportarServicio().contratos();
 
                         break;
                     case 4:
@@ -267,7 +267,7 @@ public class ContratoServicio
                         // Validar valor
                         contrato.setValorTotal(validacion.validarValorTotal());
                         System.out.println("información actualizada.");
-                        new ExportarContratos().exportarContratos();
+                        new ExportarServicio().contratos();
 
                         break;
 
@@ -369,7 +369,7 @@ public class ContratoServicio
 
                     contrato.setEstado("FINALIZADO");
                     System.out.println("Contrato finalizado correctamente...");
-                    new ExportarContratos().exportarContratos();
+                    new ExportarServicio().contratos();
 
                     return contratos;
                 }
